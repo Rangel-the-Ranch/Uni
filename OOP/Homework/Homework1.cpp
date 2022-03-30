@@ -97,6 +97,13 @@ class interval{
         int getLenght()const{
             return this->B - this->A;
         }
+        int inItInInterval(int number)const{
+            if(this->A <= number && this->B >= number){
+                return true;
+            }else{
+                return false;    
+            }
+        }
         int primaryNumbersCount()const{
             int counter = 0;
             for(int i=this->A;i<=this->B;i++){
@@ -189,8 +196,6 @@ class interval{
         }
 
         bool isSuperInterval(const interval& secondInterval)const{
-            
-            
             if(this->B >= secondInterval.B && this->A >= secondInterval.A){
                 return true;
             }
