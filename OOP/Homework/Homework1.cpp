@@ -97,7 +97,7 @@ class interval{
         int getLenght()const{
             return this->B - this->A;
         }
-        int inItInInterval(int number)const{
+        int isItInInterval(int number)const{
             if(this->A <= number && this->B >= number){
                 return true;
             }else{
