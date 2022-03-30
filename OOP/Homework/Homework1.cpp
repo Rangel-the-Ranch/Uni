@@ -6,7 +6,8 @@ class interval{
         int B;
         bool ValidInputCheck(){
             if(this->A > this->B){
-                setPoints(0,0); //алтернативно може this->a = 0; this->b = 0; ако е проблем "рекурсията";
+                this->A = 0;
+                this->B = 0;
             }
         }
         bool isItPrime(int number)const{
@@ -63,12 +64,27 @@ class interval{
     public:
         interval(){
             setPoints(0,0);
-        };
+        }
+        interval(int n){
+            if(n >= 0){
+                setPoints(0,n);
+            }else{
+                setPoints(n,0);
+            }
+        }
         interval(int a, int b){
             setPoints(a,b);
         }
-        void setPoints(int a ,int b){ //Ако сложа да взима по референции ми дава проблем с lvalue
+        void setPoints(int a ,int b){
             this->A = a;
+            this->B = b;
+            ValidInputCheck();
+        }
+        void setA(int a){
+            this->A = a;
+            ValidInputCheck();
+        }
+        void setB(int b){
             this->B = b;
             ValidInputCheck();
         }
@@ -172,7 +188,7 @@ class interval{
             return result; 
         }
 
-        bool isSuperInterval(const interval& secondInterval)const{ //сечение
+        bool isSuperInterval(const interval& secondInterval)const{
             
             
             if(this->B >= secondInterval.B && this->A >= secondInterval.A){
@@ -180,15 +196,6 @@ class interval{
             }
             return false;
         }
-        /*
-        setA(int& a){             //Индивидуално или групово да са ми set и get; 
-            this->A = a;            //Ако set е индивидуално то има проблеми при валидацията
-        }
-        setB(int& b){           
-            this->B = b;
-        }
-        */
-
 };
 int main(){
     interval t1(3,10);
@@ -203,7 +210,6 @@ int main(){
     //std::cout<<result.getB();
     //std::cout<<t2.isSuperInterval(result);
     //std::cout<<result.primaryNumbersCount();
-
     //interval resultTwo = t1.combinationInterval(t2);
     //std::cout<<resultTwo.getA()<<" ";
     //std::cout<<resultTwo.getB();
