@@ -49,7 +49,7 @@ int lenghtOfFileTrue(const char* source){
         return -1;
     }
 
-    outFile.seek(0,std::ios::end);
+    outFile.seekg(0,std::ios::end);
     unsigned counter =outFile.tellg();
     outFile.close();
     return counter;
