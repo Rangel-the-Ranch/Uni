@@ -2,8 +2,7 @@
 #include<fstream>
 #include<cstring>
 
-//using namespace std;
-class classFile{
+class File{
   private:
 
     const char* source;
@@ -26,12 +25,12 @@ class classFile{
     }
   public:
     
-    classFile( const char* addr){
+    File( const char* addr){
       setSource(addr);
       std::ifstream ifile(addr ,std::ios::binary);
       if(!ifile.is_open()){
         std::cout<<"Error opening file on reading";
-        this->~classFile();
+        this->~File();
       }
       this->size = getFileSize(ifile);
       for(int i=0;i<size;i++){
@@ -39,7 +38,7 @@ class classFile{
       }
       ifile.close();
     }
-    ~classFile(){
+    ~File(){
       delete []text;
     }
     void setSource(const char* addr){
@@ -83,7 +82,7 @@ class classFile{
       this->size++; 
     }
     void save(){
-      std::fstream ofile(source ,std::ios::binary | std::ios::trunc);
+      std::ofstream ofile(source ,std::ios::binary | std::ios::trunc);
       if(!ofile.is_open()){
         std::cout<<"Error opening file on writing";
       }else{
@@ -93,7 +92,7 @@ class classFile{
       }
     }
     void saveAs(const char* newSource){
-      std::fstream ofile(newSource ,std::ios::binary | std::ios::trunc);
+      std::ofstream ofile(newSource ,std::ios::binary | std::ios::trunc);
       if(!ofile.is_open()){
         std::cout<<"Error opening new file on writing";
       }else{
@@ -111,38 +110,17 @@ class classFile{
 
 int main(){
 
-
 const char* fileOne = "file1.dat";
 const char* fileTwo = "file2.dat";
 const char* fileThree = "file3.dat";
-const char* activeFile = fileOne;
-std::fstream file(activeFile ,std::ios::binary | std::ios::in | std::ios::out);
-//unsigned size = getFileSize(file);
 
-//viewFile( array , size);
-//std::cout<<array;
-//activeFile = fileTwo;
-file.close();
-classFile A(fileOne);
-
+//File A(fileThree);
 //A.add('E');
-//A.add('A');
-//A.add('y');
 //A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.remove();
-A.viewFile();
+//A.change
+//A.change('6' , 7)
+//A.viewFile();
 //A.save();
+//A.saveAs("file4.dat");
+
 }
