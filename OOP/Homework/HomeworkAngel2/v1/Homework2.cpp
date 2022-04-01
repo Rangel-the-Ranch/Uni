@@ -9,7 +9,7 @@ unsigned getFileSize(std::fstream &iFile){          //size_t??? //тук се п
 	iFile.seekg(0, ios::end);
 	unsigned result = iFile.tellg();
 	iFile.seekg(currentPosition);
-	return result-1;                           // result-1 заради затапващия символ
+	return result-1;                          
 }
 
 void viewFile(std::fstream& iFile){  //каква е разликата дали го викам обикновенно или по референция
@@ -59,13 +59,13 @@ void remove(std::fstream& oFile){
   char* newText = new char[size];
   oFile.seekp(ios::beg);
   oFile.read( (char*)text ,size-1);
-  oFile.seekp(ios::beg);///////////////////////////////Незавършено
+  oFile.seekp(ios::beg);
   strncpy(newText,text,size-1);
-  ;
-  cout<<text<<endl;
-  cout<<newText<<endl;
-  oFile<<newText<<" ";
-  //oFile.write( (char*)newText ,size);     
+  newText[size] = '\0';
+  //cout<<text<<endl;
+  //cout<<newText<<endl;
+  //oFile<<newText;
+  oFile.write( (char*)newText ,size);     
 
   delete []text;
   delete text;                              //Това е ненужно нали?
@@ -81,11 +81,13 @@ void add(std::fstream& oFile ,char newSym){
   oFile.read( (char*)text ,size );
   text[size] = newSym;
   oFile.seekp(ios::beg);
-  //cout<<text<<endl;
   oFile.write( (char*)text ,size+2);     //Тук с проба грешка стигнах до извода че трябва да е +2 но не знам защо не е +1
 
   delete []text;
   oFile.seekp(currentPosition);
+}
+void editFile(const char* source){
+
 }
 int main(){
   fstream file("file.dat", ios::out | ios::in | ios::binary | ios::trunc);   //ако нямам trunc  и файлът не съществува то тогава няма да се създаде нов
@@ -93,19 +95,23 @@ int main(){
     cout<<"ne se otvarq";
     return 0;
   }
-  int a = 999999;
   char str[13] = "efo5i124^ubA";
   file.write((const char*)&str, sizeof(str));   
-  //unsigned int size = getFileSize(file); 
-  //cout<<size;
-  //viewFile(file);
-
+  
   //change(file,2,'A');
-  //remove(file);
+  remove(file);
+  remove(file);
+  remove(file);
   //add(file , 'B');
   //add(file , 'R');
   //add(file , 'O');
   viewFile(file);
   file.close();
+
+const char* fileOne = "file1.dat";
+const char* fileTwo = "file2.dat";
+const char* fileThree = "file3.dat";
+//char* activeFile = fileOne;
+//char* array = new char[];
 
 }
