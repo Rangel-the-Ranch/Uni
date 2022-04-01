@@ -4,12 +4,11 @@
 
 class File{
   private:
-
     const char* source;
     unsigned int size;
     char* text = new char[size];
 
-    unsigned int getFileSize(std::ifstream& iFile){ 
+    unsigned int getFileSize(std::ifstream& iFile){       ///size_t  //каква е разликата дали го викам поток обикновенно или по референция
 	    unsigned int currentPosition = iFile.tellg();
 	    iFile.seekg(0, std::ios::end);
 	    unsigned int result = iFile.tellg();
@@ -24,7 +23,6 @@ class File{
       }
     }
   public:
-    
     File( const char* addr){
       setSource(addr);
       std::ifstream ifile(addr ,std::ios::binary);
@@ -66,7 +64,8 @@ class File{
         if( (symbol >=  65 && symbol <= 90 ) || (symbol >= 97 && symbol<=122 ) ){
           std::cout<<symbol<<"  ";
         }else{
-          std::cout<<symbol<<"  ";
+          //std::cout<<symbol<<"  ";
+          std::cout<<". ";
         }
      }
     }
@@ -105,22 +104,16 @@ class File{
 
 };
 
-
-
-
 int main(){
-
-const char* fileOne = "file1.dat";
-const char* fileTwo = "file2.dat";
-const char* fileThree = "file3.dat";
-
-//File A(fileThree);
-//A.add('E');
-//A.remove();
-//A.change
-//A.change('6' , 7)
-//A.viewFile();
-//A.save();
-//A.saveAs("file4.dat");
-
+  const char* fileOne = "file1.dat";
+  const char* fileTwo = "file2.dat";
+  const char* fileThree = "file3.dat";
+  //File A(fileThree);
+  //A.add('E');
+  //A.remove();
+  //A.change
+  //A.change('6' , 7)
+  //A.viewFile();
+  //A.save();
+  //A.saveAs("file4.dat");
 }
