@@ -108,7 +108,7 @@ int main(){
   const char* fileOne = "file1.dat";
   const char* fileTwo = "file2.dat";
   const char* fileThree = "file3.dat";
-  //File A(fileThree);
+  //File A("myData.dat");
   //A.add('E');
   //A.remove();
   //A.change
