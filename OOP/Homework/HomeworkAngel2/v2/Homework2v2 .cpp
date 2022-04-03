@@ -108,12 +108,17 @@ int main(){
   const char* fileOne = "file1.dat";
   const char* fileTwo = "file2.dat";
   const char* fileThree = "file3.dat";
-  //File A("myData.dat");
+    std::ofstream file(fileThree ,std::ios::binary| std::ios::trunc);
+    int x=60000;
+    file.write((char*)&x , sizeof(x));
+    file.close();
+
+  File A(fileThree);
   //A.add('E');
   //A.remove();
   //A.change
   //A.change('6' , 7)
-  //A.viewFile();
+  A.viewFile();
   //A.save();
   //A.saveAs("file4.dat");
 }
