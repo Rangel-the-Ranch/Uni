@@ -1,11 +1,12 @@
 #include<iostream>
-#include <cmath>
-//#include "player.h"
-//#include "game.h"
+#include "player.h"
+#include "game.h"
 
 
 int main(){
-    //player A("Saso","123",18,100);
-    //casino game(A);
+    player A("Ivan","123456",18,100);
+    casino game;
+    game.play(A);
 
+    //std::cout<<A.getMoney();
 }
