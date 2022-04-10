@@ -8,5 +8,5 @@ int main(){
     casino game;
     game.play(A);
 
-    //std::cout<<A.getMoney();
+    std::cout<<A.getMoney();
 }
