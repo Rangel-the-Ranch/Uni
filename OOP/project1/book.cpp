@@ -9,8 +9,9 @@ void book::free(){
     delete []this->author;
     delete []this->location;
     delete []this->description;
+    delete []this->isbn;
 }
-double book::validRatingConverter(double rate){
+double book::validRatingConverter(double rate)const {
     if(rate >= 1 && rate <= 5){
         return rate;
     }else{
@@ -21,6 +22,10 @@ double book::validRatingConverter(double rate){
             return 5;
         }
     }
+    return 1;
+}
+bool book::validIsbn(const char* checkIsbn)const{
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     return 1;
 }
 //###################
@@ -38,6 +43,9 @@ void book::copyFrom(const book& other){
     strcpy(this->description , other.getDescription() );
 
     setRating( other.getRating() );
+
+    this->isbn = new char [ sizeof( other.getIsbn() ) +1  ];
+    strcpy(this->isbn , other.getIsbn() );
 }
 
 book&  book::operator=(const book& other){
@@ -53,7 +61,7 @@ book::book(const book& other){
 }
 
 //####################
-book::book(const char* newTitle ,  const char* newAuthor, const char* newLocation , const char* newDescription , double newRating){
+book::book(const char* newTitle ,  const char* newAuthor, const char* newLocation , const char* newDescription , double newRating ,const char* newIsbn){
     this->title = new char[ sizeof(newTitle) + 1 ];
     strcpy(this->title , newTitle);
 
@@ -67,6 +75,16 @@ book::book(const char* newTitle ,  const char* newAuthor, const char* newLocatio
     strcpy(this->description , newDescription);
     
     setRating( newRating );
+
+    if( validIsbn(newIsbn) == true ){
+        this->isbn = new char[ sizeof(newIsbn) + 1 ];
+        strcpy(this->isbn , newIsbn);
+    }else{
+        std::cout<<"Invalid Isbn";
+        this->isbn = nullptr;
+    }
+
+
 }
 book::book(){
     /*
@@ -87,6 +105,7 @@ book::book(){
    this->location = nullptr;
    this->description = nullptr;
    this->rating = 1;
+   this->isbn = nullptr;
 }
 book::~book(){
     free();
@@ -127,10 +146,23 @@ void book::setDescription(const char* newDescription){
 const char* book::getDescription()const {
     return this->description;
 }
-void book::setRating(double newRating){
+void book::setRating(const double newRating){
     this->rating = validRatingConverter(newRating);
 }
 double book::getRating()const{
     return this->rating;
+}
+void book::setIsbn(const char* newIsbn){
+    if( validIsbn(newIsbn) == true ){
+        delete []this->isbn;
+        this->isbn = new char [ sizeof(newIsbn) + 1 ];
+        strcpy(this->isbn, newIsbn);
+    }else{
+        std::cout<<"Invalid ISBN";
+        this->isbn = nullptr;
+    }
+}
+const char* book::getIsbn()const{
+    return this->isbn;
 }
 //#################

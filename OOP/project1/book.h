@@ -8,19 +8,21 @@ class book{
         char* location;
         char* description;
         double rating;
+        char* isbn;
         
         //static const  char* defaultParameter;
 
         void free();
-        double  validRatingConverter(double rate);
-    
+        double  validRatingConverter(double rate)const;
+        bool validIsbn(const char* checkIsbn)const;
+
         void copyFrom(const book& other);
     public:
 
         book& operator=(const book& other);
-        book(const book& other);
 
-        book(const char* newTitle , const char* newAuthor, const char* newLocation , const char* newDescription, double newRating);
+        book(const book& other);
+        book(const char* newTitle , const char* newAuthor, const char* newLocation , const char* newDescription, double newRating, const char* newIsbn);
         book();
         ~book();
 
@@ -28,12 +30,14 @@ class book{
         void setAuthor(const char* newAuthor);
         void setLocation(const char* newLocation);
         void setDescription(const char* newDescription);
-        void setRating(double newRating);
+        void setRating(const double newRating);
+        void setIsbn(const char* newIsbn);
         const char* getTitle()const;
         const char* getAuthor()const;
         const char* getLocation()const;
         const char* getDescription()const;
         double getRating()const;
+        const char* getIsbn()const;
         
 
         

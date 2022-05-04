@@ -4,8 +4,15 @@
 
 int main(){
     
-    book A("Title","Ivan","txt.txt","test 1 2 3" ,4.2);
-    book V(A);
+
+
+
+
+
+
+    
+    //book A("Title","Ivan","txt.txt","test 1 2 3" ,4.2 ,"0000000000");
+    //book V(A);
     //V = A;
     //A.setTitle("totle");
     //A.setAuthor("gosho");
@@ -24,5 +31,6 @@ int main(){
     std::cout<<V.getLocation()<<std::endl;
     std::cout<<V.getDescription()<<std::endl;
     std::cout<<V.getRating()<<std::endl;
+    std::cout<<V.getIsbn()<<std::endl;
     */
 }
