@@ -80,7 +80,7 @@ book::book(const char* newTitle ,  const char* newAuthor, const char* newLocatio
         this->isbn = new char[ sizeof(newIsbn) + 1 ];
         strcpy(this->isbn , newIsbn);
     }else{
-        std::cout<<"Invalid Isbn";
+        //std::cout<<"Invalid Isbn";
         this->isbn = nullptr;
     }
 
@@ -158,7 +158,7 @@ void book::setIsbn(const char* newIsbn){
         this->isbn = new char [ sizeof(newIsbn) + 1 ];
         strcpy(this->isbn, newIsbn);
     }else{
-        std::cout<<"Invalid ISBN";
+        //std::cout<<"Invalid ISBN";
         this->isbn = nullptr;
     }
 }

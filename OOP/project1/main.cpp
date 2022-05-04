@@ -1,6 +1,9 @@
 #include<iostream>
-#include"book.h"
-#include"book.cpp"
+//#include"book.h"
+//#include"book.cpp"
+
+#include"library.h"
+#include"library.cpp"
 
 int main(){
     
@@ -10,7 +13,7 @@ int main(){
 
 
 
-    
+
     //book A("Title","Ivan","txt.txt","test 1 2 3" ,4.2 ,"0000000000");
     //book V(A);
     //V = A;
