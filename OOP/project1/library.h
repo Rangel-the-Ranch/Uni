@@ -17,5 +17,7 @@ class library{
         ~library();
 
         void addBook(const book& newBook);
-
+        void listBooks()const;
+        void readBook(const unsigned int index)const;
+        
 };

@@ -6,13 +6,18 @@
 #include"library.cpp"
 
 int main(){
+    book Bone("B1","Ivan","books/book1.txt","tova e purvata knniga",1.11,"11111111");
+    book Btwo("B2","Gosho","books/book2.txt","tova e vtorata knniga",2.2,"2222222");
+    book Bthree("B3","Petur","books/book3.txt","tova e tretata knniga",3.333,"3333333333");
+    //Btwo.printBook();
     
-
-
-
-
-
-
+    library lib;
+    lib.addBook(Bone);
+    lib.addBook(Btwo);
+    lib.addBook(Bthree);
+    
+    //lib.listBooks();
+    lib.readBook(2);
 
     //book A("Title","Ivan","txt.txt","test 1 2 3" ,4.2 ,"0000000000");
     //book V(A);

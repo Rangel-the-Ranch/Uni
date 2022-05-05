@@ -1,6 +1,8 @@
 
 //#include<iostream>
+#include<iostream>
 #include<cstring>
+#include<fstream>
 //#include"book.h"
 //using namespace std;
 
@@ -26,8 +28,16 @@ double book::validRatingConverter(double rate)const {
 }
 bool book::validIsbn(const char* checkIsbn)const{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    return 1;
+    return true;
 }
+size_t book::getFileSize(std::ifstream& iFile)const{
+    size_t currentPosition = iFile.tellg();
+	iFile.seekg(0, std::ios::end);
+	size_t result = iFile.tellg();
+	iFile.seekg(currentPosition);
+	return result;     
+}
+
 //###################
 void book::copyFrom(const book& other){
     this->title = new char[ sizeof( other.getTitle() ) + 1];
@@ -166,3 +176,29 @@ const char* book::getIsbn()const{
     return this->isbn;
 }
 //#################
+
+void book::printBook()const{
+    std::cout<<getTitle();
+    std::cout<<std::endl;
+    std::cout<<"by: "<<getAuthor();
+    std::cout<<std::endl;
+    std::cout<<std::endl;
+    size_t sizeOfFile;
+    std::ifstream iBook( getLocation() , std::ios::out );
+    if(iBook.is_open() != true ){
+        std::cout<<"Cannot open file";
+    }else{
+        sizeOfFile = getFileSize(iBook);
+        //std::cout<<sizeOfFile<<std::endl;
+        char* text = new char[sizeOfFile + 1];
+        iBook.read(text ,sizeOfFile);
+        std::cout<<text;
+        delete text;
+        iBook.close();
+            
+    }
+    
+    
+}
+    
+
