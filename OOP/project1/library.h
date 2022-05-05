@@ -13,11 +13,17 @@ class library{
         void free();
         void resize();
     public:
+
         library();
         ~library();
 
         void addBook(const book& newBook);
         void listBooks()const;
+        void listByRakingAc()const;
+        void listByRatingDec()const;
+
         void readBook(const unsigned int index)const;
-        
+        void readBookBySentences(const unsigned int index)const;
+        void readBookByCharactersInPage(const unsigned int index , const unsigned int symbolsInPage)const;
+        void readBookByPage(const unsigned int index , const unsigned int linesInPage)const;
 };

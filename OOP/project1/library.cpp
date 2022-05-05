@@ -29,18 +29,52 @@ void library::addBook(const book& newBook){
 
 void library::listBooks()const{
     for(size_t i = 0 ; i < this->numberOfBooks; i++){
-        std::cout<<books[i].getTitle()<<" ";
-        std::cout<<books[i].getAuthor()<<" ";
-        std::cout<<books[i].getIsbn();
+        std::cout<<this->books[i].getTitle()<<" ";
+        std::cout<<this->books[i].getAuthor()<<" ";
+        std::cout<<this->books[i].getIsbn();
+        std::cout<<std::endl;
+    }
+}
+void library::listBooks()const{
+    
+    for(size_t i = 0 ; i < this->numberOfBooks; i++){
+        std::cout<<this->books[i].getTitle()<<" ";
+        std::cout<<this->books[i].getAuthor()<<" ";
+        std::cout<<this->books[i].getIsbn();
         std::cout<<std::endl;
     }
 }
 
+
+
 void library::readBook(const unsigned int index)const{
     //std::cout<<numberOfBooks;
     if(index + 1 <= numberOfBooks){
-        books[index].printBook();
+        this->books[index].printBook();
     }else{
         std::cout<<"this book does not exist\n";//<<std::endl;
     }
 }
+void library::readBookBySentences(const unsigned int index)const{
+    if(index + 1 <= numberOfBooks){
+        this->books[index].printBySentence();
+    }else{
+        std::cout<<"this book does not exist\n";//<<std::endl;
+    }
+}
+void library::readBookByCharactersInPage(const unsigned int index , const unsigned int symbolsInPage)const{
+    if(index + 1 <= numberOfBooks){
+        this->books[index].printByNcharacters(symbolsInPage);
+    }else{
+        std::cout<<"this book does not exist\n";//<<std::endl;
+    }
+}
+
+void library::readBookByPage(const unsigned int index , const unsigned int linesInPage)const{
+    if(index + 1 <= numberOfBooks){
+        this->books[index].printByPage(linesInPage);
+    }else{
+        std::cout<<"this book does not exist\n";//<<std::endl;
+    }
+}
+

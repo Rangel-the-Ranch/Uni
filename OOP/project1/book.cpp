@@ -13,7 +13,7 @@ void book::free(){
     delete []this->description;
     delete []this->isbn;
 }
-double book::validRatingConverter(double rate)const {
+const double book::validRatingConverter(double rate)const {
     if(rate >= 1 && rate <= 5){
         return rate;
     }else{
@@ -26,11 +26,11 @@ double book::validRatingConverter(double rate)const {
     }
     return 1;
 }
-bool book::validIsbn(const char* checkIsbn)const{
+const bool book::validIsbn(const char* checkIsbn)const{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     return true;
 }
-size_t book::getFileSize(std::ifstream& iFile)const{
+const size_t book::getFileSize(std::ifstream& iFile)const{
     size_t currentPosition = iFile.tellg();
 	iFile.seekg(0, std::ios::end);
 	size_t result = iFile.tellg();
@@ -159,7 +159,7 @@ const char* book::getDescription()const {
 void book::setRating(const double newRating){
     this->rating = validRatingConverter(newRating);
 }
-double book::getRating()const{
+const double book::getRating()const{
     return this->rating;
 }
 void book::setIsbn(const char* newIsbn){
@@ -177,6 +177,21 @@ const char* book::getIsbn()const{
 }
 //#################
 
+void book::newPageSpacer()const{
+    //std::cout<<"\n newPage \n";
+    for(int space = 0; space < LINES_BETWEEN_PAGES; space++){
+        std::cout<<std::endl;
+    }
+}
+const bool book::isEndSymbol(const char symbol)const{
+ 
+   if( symbol == '.' || symbol == '!' || symbol == '?'){
+       return true;
+   }else{
+       return false;
+   }
+}
+
 void book::printBook()const{
     std::cout<<getTitle();
     std::cout<<std::endl;
@@ -193,12 +208,99 @@ void book::printBook()const{
         char* text = new char[sizeOfFile + 1];
         iBook.read(text ,sizeOfFile);
         std::cout<<text;
-        delete text;
-        iBook.close();
-            
+        delete []text;
+        iBook.close();     
     }
-    
-    
+     
 }
-    
 
+
+ 
+void book::printByPage(const unsigned int linesInPage)const{
+    std::cout<<getTitle();
+    std::cout<<std::endl;
+    std::cout<<"by: "<<getAuthor();
+    std::cout<<std::endl;
+    std::cout<<std::endl;
+    size_t sizeOfFile;
+    std::ifstream iBook( getLocation() );
+    if(iBook.is_open() != true ){
+        std::cout<<"Cannot open file";
+    }else{
+        unsigned counter = 0;
+        while(iBook.tellg() < sizeOfFile){
+            char* text = new char[ MAX_SYMBOLS_IN_LINE ];
+            iBook.getline(text , MAX_SYMBOLS_IN_LINE);
+           std::cout<<text;
+            delete []text;
+            counter++;
+            if(counter%linesInPage == 0){
+                newPageSpacer();
+            }
+        }   
+        iBook.close();     
+    }
+}
+
+
+void book::printByNcharacters(const unsigned int symbolsInPage)const{
+    std::cout<<getTitle();
+    std::cout<<std::endl;
+    std::cout<<"by: "<<getAuthor();
+    std::cout<<std::endl;
+    std::cout<<std::endl;
+    size_t sizeOfFile;
+    std::ifstream iBook( getLocation() , std::ios::out );
+    if(iBook.is_open() != true ){
+        std::cout<<"Cannot open file";
+    }else{
+        sizeOfFile = getFileSize(iBook);
+
+        for(int i = 0; i<sizeOfFile; i = i + symbolsInPage ){
+            char* text = new char[symbolsInPage + 1];
+            iBook.read(text ,symbolsInPage);
+            std::cout<<text;
+            delete []text;
+
+            newPageSpacer();
+
+        }
+
+        iBook.close();     
+    } 
+}
+
+
+void book::printBySentence()const{
+    std::cout<<getTitle();
+    std::cout<<std::endl;
+    std::cout<<"by: "<<getAuthor();
+    std::cout<<std::endl;
+    std::cout<<std::endl;
+    size_t sizeOfFile;
+    std::ifstream iBook( getLocation() , std::ios::out );
+    if(iBook.is_open() != true ){
+        std::cout<<"Cannot open file";
+    }else{
+
+        sizeOfFile = getFileSize(iBook);
+        bool nearEnd = false;
+        for(int i = 0; i < sizeOfFile ;i++){
+            
+            char currentSymbol = iBook.get();
+
+            if(isEndSymbol(currentSymbol)){
+                std::cout<<currentSymbol; 
+                nearEnd = true;
+
+            }else{
+                if(nearEnd == true){
+                    newPageSpacer();
+                    nearEnd = false;
+                }
+                std::cout<<currentSymbol;  
+            }
+        }
+        iBook.close();     
+    } 
+}
