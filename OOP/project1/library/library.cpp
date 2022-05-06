@@ -64,8 +64,8 @@ void library::listBooks()const{
     for(size_t i = 0 ; i < this->numberOfBooks; i++){
         std::cout<<this->books[i].getTitle()<<" ";
         std::cout<<this->books[i].getAuthor()<<" ";
-        std::cout<<this->books[i].getLocation()<<" ";
-        //std::cout<<this->books[i].getIsbn();
+        //std::cout<<this->books[i].getLocation()<<" ";
+        std::cout<<this->books[i].getIsbn();
         std::cout<<std::endl;
     }
 }

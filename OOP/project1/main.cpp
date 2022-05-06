@@ -2,8 +2,8 @@
 //#include"book.h"
 //#include"book.cpp"
 
-#include"library.h"
-#include"library.cpp"
+#include"library/library.h"
+#include"library/library.cpp"
 
 
 int main(){
@@ -22,7 +22,7 @@ int main(){
     lib.addBook(Bfour);
     lib.addBook(Bfive);
     //lib.removeBook(4);
-    //lib.listBooks();
+    lib.listBooks();
 
     //lib.readBook(2);
     //lib.readBookBySentences(2);

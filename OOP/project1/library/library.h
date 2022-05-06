@@ -1,7 +1,7 @@
 #pragma once
 
-#include"book.h"
-#include"book.cpp"
+#include"book/book.h"
+#include"book/book.cpp"
 
 class library{
     private:
@@ -29,4 +29,6 @@ class library{
         void readBookBySentences(const unsigned int index)const;
         void readBookByCharactersInPage(const unsigned int index , const unsigned int symbolsInPage)const;
         void readBookByPage(const unsigned int index , const unsigned int linesInPage)const;
+
+        //void searchByIsbn()const;
 };
