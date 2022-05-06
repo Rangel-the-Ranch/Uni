@@ -18,6 +18,8 @@ class library{
         ~library();
 
         void addBook(const book& newBook);
+        void removeBook(const unsigned int index);
+
         void listBooks()const;
         void listByRakingAc()const;
         void listByRatingDec()const;

@@ -4,7 +4,14 @@ void library::free(){
     delete []books;
 }
 void library::resize(){
-
+    this->sizeOfLibrary = this->sizeOfLibrary*2;
+    book* buffer = new book [this->sizeOfLibrary];
+    for(int i = 0 ; i<numberOfBooks ; i++){
+        buffer[i] = this->books[i];
+    }
+    free();
+    this->books = buffer;
+    buffer = nullptr;
 }
 
 library::library(){
@@ -20,10 +27,24 @@ void library::addBook(const book& newBook){
     
     if(this->numberOfBooks >= this->sizeOfLibrary){
         resize();
+        this->books[numberOfBooks] = newBook;
+        this->numberOfBooks++;
 
     }else{
         this->books[numberOfBooks] = newBook;
         this->numberOfBooks++;
+    }
+}
+
+void library::removeBook(const unsigned int index){
+    if( index>=this->numberOfBooks ){
+        std::cout<<"book does not exist \n";
+    }else{
+        this->numberOfBooks--;
+        for(int i = index; i < this->numberOfBooks; i++){
+            this->books[i] = this->books[i+1];
+            //std::cout<<index+1<<"->"<<index<<std::endl;
+        }
     }
 }
 
@@ -35,7 +56,8 @@ void library::listBooks()const{
         std::cout<<std::endl;
     }
 }
-void library::listBooks()const{
+/*
+void library::listByRanking()const{
     
     for(size_t i = 0 ; i < this->numberOfBooks; i++){
         std::cout<<this->books[i].getTitle()<<" ";
@@ -44,7 +66,7 @@ void library::listBooks()const{
         std::cout<<std::endl;
     }
 }
-
+*/
 
 
 void library::readBook(const unsigned int index)const{

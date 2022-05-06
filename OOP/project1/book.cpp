@@ -301,6 +301,6 @@ void book::printBySentence()const{
                 std::cout<<currentSymbol;  
             }
         }
-        iBook.close();     
+        iBook.close();
     } 
 }
