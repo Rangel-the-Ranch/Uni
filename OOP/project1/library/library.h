@@ -3,6 +3,9 @@
 #include"book/book.h"
 #include"book/book.cpp"
 
+#include"user/user.h"
+#include"user/user.cpp"
+
 class library{
     private:
         book* books;
@@ -13,10 +16,20 @@ class library{
         void free();
         void resize();
         void removeFileDecision(const unsigned int index);
+
+        void copyFrom(const library& other);
+
     public:
 
         library();
+        library(const library& other);
         ~library();
+        library& operator=(const library& other);
+
+        const size_t getNumberOfBooks()const;
+        const size_t getSizeOfLibrary()const;
+        const book* getBookArr()const;
+
 
         void addBook(const book& newBook);
         void removeBook(const unsigned int index);
@@ -31,4 +44,13 @@ class library{
         void readBookByPage(const unsigned int index , const unsigned int linesInPage)const;
 
         //void searchByIsbn()const;
+
+        void menu();
+
+        void printComandsForUser()const;
+        void printComandsForAdmin()const;
+        void printBookProfileAdmin(const unsigned int index)const;
+        void printBookProfileUser(const unsigned int index)const;
+        void printReadingOptions()const;
+
 };

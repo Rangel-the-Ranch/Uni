@@ -1,4 +1,4 @@
-//#include<cstring>
+#include<cstring>
 
 void library::free(){
     delete []books;
@@ -13,6 +13,25 @@ void library::resize(){
     this->books = buffer;
     buffer = nullptr;
 }
+const size_t library::getNumberOfBooks()const{
+    return this->numberOfBooks;
+}
+const size_t library::getSizeOfLibrary()const{
+    return this->sizeOfLibrary;
+}
+const book* library::getBookArr()const{
+    return books;
+}
+
+void library::copyFrom(const library& other){
+    this->numberOfBooks = other.getNumberOfBooks();
+    this->sizeOfLibrary = other.getSizeOfLibrary();
+    
+    //this->books = new book [ this->sizeOfLibrary ];
+
+
+
+}
 
 library::library(){
     this->books = new book [ this->DEFAULT_STARTING_LIB_SIZE ];
@@ -21,6 +40,16 @@ library::library(){
 }
 library::~library(){
     free();
+}
+library::library(const library& other){
+    copyFrom(other);
+}
+library& library::operator=(const library& other){
+    if(this != &other){
+        free();
+        copyFrom(other);
+    }
+    return *this;
 }
 
 void library::addBook(const book& newBook){
@@ -113,3 +142,48 @@ void library::readBookByPage(const unsigned int index , const unsigned int lines
     }
 }
 
+void library::printComandsForUser()const{
+    std::cout<<"1.Book list"<<std::endl;
+    std::cout<<"2.Search"<<std::endl;
+}
+void library::printComandsForAdmin()const{
+    std::cout<<"1.Book list"<<std::endl;
+    std::cout<<"2.Search"<<std::endl;
+    std::cout<<"3.Add book"<<std::endl;
+}
+void library::printBookProfileUser(const unsigned int index)const{
+    std::cout<<"Title: "<<books[index].getTitle()<<std::endl;
+    std::cout<<"Author: "<<books[index].getAuthor()<<std::endl;
+    std::cout<<"Rating: "<<books[index].getRating()<<std::endl;
+    std::cout<<"ISBN: "<<books[index].getIsbn()<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<books[index].getDescription()<<std::endl;
+  
+    std::cout<<"0.Back"<<std::endl;
+    std::cout<<"1.Read"<<std::endl;
+    
+}
+void library::printBookProfileAdmin(const unsigned int index)const{
+    std::cout<<"Title: "<<books[index].getTitle()<<std::endl;
+    std::cout<<"Author: "<<books[index].getAuthor()<<std::endl;
+    std::cout<<"Rating: "<<books[index].getRating()<<std::endl;
+    std::cout<<"ISBN: "<<books[index].getIsbn()<<std::endl;
+    std::cout<<"location: "<<books[index].getLocation()<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<books[index].getDescription()<<std::endl;
+
+    std::cout<<"0.Back"<<std::endl;
+    std::cout<<"1.Read"<<std::endl;
+    std::cout<<"2.Remove"<<std::endl;
+}
+void library::printReadingOptions()const{
+    std::cout<<"1.Read (normaly..?)"<<std::endl;
+    std::cout<<"2.Read sentence by sentency"<<std::endl;
+    std::cout<<"3.Read by N amount of lines on a page"<<std::endl;
+    std::cout<<"4.Read by N amount of symbols on a page"<<std::endl;
+
+    std::cout<<"0.Back"<<std::endl;
+}
+void library::menu(){
+
+}

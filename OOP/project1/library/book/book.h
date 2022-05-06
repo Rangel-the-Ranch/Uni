@@ -1,7 +1,8 @@
 #pragma once
-//#include"book.cpp"
-#include<fstream>
-#include<cstring>
+
+//#include<fstream>
+//#include<cstring>
+
 class book{
     private:
         char* title;
@@ -20,7 +21,7 @@ class book{
         //static const  char* defaultParameter;
 
         void free();
-        const double  validRatingConverter(double rate)const;
+        const double  validRatingConverter(const double rate)const;
         const bool validIsbn(const char* checkIsbn)const;
         const size_t getFileSize(std::ifstream& iFile)const;
         void newPageSpacer()const;
@@ -28,6 +29,7 @@ class book{
         
 
         void copyFrom(const book& other);
+
     public:
 
         book& operator=(const book& other);

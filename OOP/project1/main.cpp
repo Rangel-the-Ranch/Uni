@@ -1,13 +1,23 @@
 #include<iostream>
-//#include"book.h"
-//#include"book.cpp"
+#include<fstream>
+#include<cstring>
+
 
 #include"library/library.h"
 #include"library/library.cpp"
 
+#include"user/user.h"
+#include"user/user.cpp"
+
 
 int main(){
-    
+    //user A("Ivan Debelan" , "password" , 1);
+    //std::cout<<A.getUsername();
+
+
+
+
+    /*
     //std::cout<<std::endl<<std::endl;
     book Bone("B1","Ivan","books/book1.txt","tova e purvata knniga",1.11,"11111111");
     book Btwo("B2","Gosho","books/book2.txt","tova e vtorata knniga",2.2,"2222222");
@@ -24,12 +34,9 @@ int main(){
     //lib.removeBook(4);
     lib.listBooks();
 
-    //lib.readBook(2);
-    //lib.readBookBySentences(2);
-    //lib.readBookByCharactersInPage(1,100);
-    //lib.readBookByPage(1,10);
 
-    
+    */
+   //////////////////////////////////////////
    /*
    std::ifstream iBook( "books/book2.txt");
    if(iBook.is_open() != true ){

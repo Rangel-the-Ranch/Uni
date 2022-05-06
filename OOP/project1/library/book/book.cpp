@@ -13,7 +13,7 @@ void book::free(){
     delete []this->description;
     delete []this->isbn;
 }
-const double book::validRatingConverter(double rate)const {
+const double book::validRatingConverter(const double rate)const {
     if(rate >= 1 && rate <= 5){
         return rate;
     }else{
