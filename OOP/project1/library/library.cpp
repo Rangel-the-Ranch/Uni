@@ -142,6 +142,58 @@ void library::readBookByPage(const unsigned int index , const unsigned int lines
     }
 }
 
+const int library::validInputConverter(const char input , const unsigned int numberOfCommands)const{
+    if( sizeof(input) != 1 ){
+        return -1;
+    }else{
+        if(input < 48 || input > 57 ){
+            return -1;
+        }else{
+            unsigned int command;
+            if(input == '0' ){
+                command = 0;
+            }
+            if(input == '1' ){
+                command = 1;
+            }
+            if(input == '2' ){
+                command = 2;
+            }
+            if(input == '3' ){
+                command = 3;
+            }
+            if(input == '4' ){
+                command = 4;
+            }
+            if(input == '5' ){
+                command = 5;
+            }
+            if(input == '6' ){
+                command = 6;
+            }
+            if(input == '7' ){
+                command = 7;
+            }
+            if(input == '8' ){
+                command = 8;
+            }
+            if(input == '9' ){
+                command = 9;
+            }
+            if(command > numberOfCommands){
+                return -1;
+            }else{
+                return command;
+            }
+        }
+    }
+}
+const char library::getInput()const{
+    char input[MAX_INPUT_SIZE];
+    std::cin>>input;
+    return input[0];
+}
+
 void library::printComandsForUser()const{
     std::cout<<"1.Book list"<<std::endl;
     std::cout<<"2.Search"<<std::endl;
@@ -184,6 +236,30 @@ void library::printReadingOptions()const{
 
     std::cout<<"0.Back"<<std::endl;
 }
-void library::menu(){
+void library::menu(const user& person){
+    if(person.getIsAdmin() == true){
+        printComandsForAdmin();
+        char input = getInput();
+        int convInput = validInputConverter(input , 3);
+        if( convInput == -1){
+            std::cout<<"Invalid command:"<<std::endl;
+            menu(person);
+        }else{
+            if(convInput == 0){
+                std::cout<<"WIP\n";
+            }
+            if(convInput == 1){
+                
+                //listBooks();
+            }
+            if(convInput == 2){
+                std::cout<<"WIP\n";
+            }
+            if(convInput == 3){
+                std::cout<<"WIP\n";
+            }
+        }
+    }else{
 
+    }
 }

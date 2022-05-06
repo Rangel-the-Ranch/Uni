@@ -12,10 +12,13 @@ class library{
         size_t numberOfBooks;
         size_t sizeOfLibrary;
         static const size_t DEFAULT_STARTING_LIB_SIZE = 16;
+        static const size_t MAX_INPUT_SIZE = 64;
 
         void free();
         void resize();
         void removeFileDecision(const unsigned int index);
+
+        const int validInputConverter(const char* input , const unsigned int numberOfCommands)const;
 
         void copyFrom(const library& other);
 
@@ -45,7 +48,9 @@ class library{
 
         //void searchByIsbn()const;
 
-        void menu();
+        void menu(const user& person);
+        const int validInputConverter(const char input , const unsigned int numberOfCommands)const;
+        const char getInput()const;
 
         void printComandsForUser()const;
         void printComandsForAdmin()const;
