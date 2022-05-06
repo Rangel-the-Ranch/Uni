@@ -25,7 +25,7 @@ class book{
         const size_t getFileSize(std::ifstream& iFile)const;
         void newPageSpacer()const;
         const bool isEndSymbol(const char symbol)const;
-
+        
 
         void copyFrom(const book& other);
     public:
@@ -49,6 +49,8 @@ class book{
         const char* getDescription()const;
         const double getRating()const;
         const char* getIsbn()const;
+
+        void removeFile();
 
         void printBook()const;
         void printByPage(const unsigned int linesInPage)const;

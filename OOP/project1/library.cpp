@@ -41,10 +41,22 @@ void library::removeBook(const unsigned int index){
         std::cout<<"book does not exist \n";
     }else{
         this->numberOfBooks--;
+        removeFileDecision(index);
         for(int i = index; i < this->numberOfBooks; i++){
             this->books[i] = this->books[i+1];
-            //std::cout<<index+1<<"->"<<index<<std::endl;
+            
         }
+        std::cout<<"The book is unlisted"<<std::endl;
+    }
+}
+void library::removeFileDecision(const unsigned int index){
+    bool decision;
+    std::cout<<"Do you want to remove: "<<books[index].getLocation() <<std::endl;
+    std::cin>>decision;
+    if(decision == true){
+        this->books[index].removeFile();
+    }else{
+        std::cout<<"file not removed\n";
     }
 }
 
@@ -52,7 +64,8 @@ void library::listBooks()const{
     for(size_t i = 0 ; i < this->numberOfBooks; i++){
         std::cout<<this->books[i].getTitle()<<" ";
         std::cout<<this->books[i].getAuthor()<<" ";
-        std::cout<<this->books[i].getIsbn();
+        std::cout<<this->books[i].getLocation()<<" ";
+        //std::cout<<this->books[i].getIsbn();
         std::cout<<std::endl;
     }
 }

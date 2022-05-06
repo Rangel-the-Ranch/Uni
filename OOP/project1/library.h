@@ -12,6 +12,7 @@ class library{
 
         void free();
         void resize();
+        void removeFileDecision(const unsigned int index);
     public:
 
         library();

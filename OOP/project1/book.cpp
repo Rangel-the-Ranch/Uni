@@ -37,6 +37,10 @@ const size_t book::getFileSize(std::ifstream& iFile)const{
 	iFile.seekg(currentPosition);
 	return result;     
 }
+void book::removeFile(){
+    remove( getLocation() );
+    std::cout<<"Removed "<<getLocation()<<std::endl;
+}
 
 //###################
 void book::copyFrom(const book& other){
