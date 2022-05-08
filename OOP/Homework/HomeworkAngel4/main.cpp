@@ -1,41 +1,15 @@
 #include <iostream>
 #include "MyString/MyString.h"
 #include "MyString/MyString.cpp"
-#include "Queue.hpp"
+
+#include "Queues/PrioQueue.hpp"
 int main()
 {
-	{
-		MyQueue<size_t> q;
+	prioQueue<char> A;
 
-		q.push(3);
-		q.push(10);
-
-		std::cout << q.peek() << std::endl;
-		q.pop();
-
-		std::cout << q.peek() << std::endl;
-		q.pop();
-
-	}
-	{
-		MyQueue<MyString> q;
-
-		MyString name = "Ivan";
-
-		q.push(std::move(name)); //so it could call push(MyString&&)
-
-		MyString name2 = "Petur";
-		q.push(name2); //push(const MyString&)
-
-		q.push("Alex");//push(MyString&&)
-
-		std::cout << q.peek() << std::endl;
-		q.pop();
-
-		std::cout << q.peek() << std::endl;
-		q.pop();
-
-		std::cout << q.peek() << std::endl;
-		q.pop();
-	}
+	A.push(2,'3');
+	A.push(1,'2');
+	A.push(0,'1');
+	A.pop();
+	std::cout<<A.peek();
 }

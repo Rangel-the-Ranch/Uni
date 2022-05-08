@@ -51,11 +51,11 @@ MyString::MyString(size_t n)
 	size = numSize;
 }
 
-MyString::MyString(const char* data)
+MyString::MyString()
 {
-	size = strlen(data);
-	str = new char[size + 1];
-	strcpy(str, data);
+	size = strlen(nullptr);
+	str = nullptr;
+	
 }
 
 MyString::MyString(const MyString& other)
