@@ -42,7 +42,6 @@ void book::removeFile(){
     std::cout<<"Removed "<<getLocation()<<std::endl;
 }
 
-//###################
 void book::copyFrom(const book& other){
     this->title = new char[ sizeof( other.getTitle() ) + 1];
     strcpy(this-> title, other.getTitle() );
@@ -74,7 +73,6 @@ book::book(const book& other){
     copyFrom(other);
 }
 
-//####################
 book::book(const char* newTitle ,  const char* newAuthor, const char* newLocation , const char* newDescription , double newRating ,const char* newIsbn){
     this->title = new char[ sizeof(newTitle) + 1 ];
     strcpy(this->title , newTitle);
@@ -101,19 +99,6 @@ book::book(const char* newTitle ,  const char* newAuthor, const char* newLocatio
 
 }
 book::book(){
-    /*
-    this->title = new char[ sizeof("default") + 1 ];
-    strcpy(this->title , "default");
-
-    this->author = new char[ sizeof("default") + 1 ];
-    strcpy(this->author , "default");
-
-    this->location = new char[ sizeof("default") + 1 ];
-    strcpy(this->location , "default");
-
-    this->description = new char[ sizeof("default") + 1 ];
-    strcpy(this->description , "default"); 
-    */
    this->title = nullptr;
    this->author = nullptr;
    this->location = nullptr;
@@ -124,7 +109,7 @@ book::book(){
 book::~book(){
     free();
 }
-//#########################
+
 void book::setTitle(const char* newTitle){
     delete []this->title;
     this->title = new char [ sizeof(newTitle) + 1 ];
@@ -179,7 +164,6 @@ void book::setIsbn(const char* newIsbn){
 const char* book::getIsbn()const{
     return this->isbn;
 }
-//#################
 
 void book::newPageSpacer()const{
     //std::cout<<"\n newPage \n";
@@ -208,7 +192,6 @@ void book::printBook()const{
         std::cout<<"Cannot open file";
     }else{
         sizeOfFile = getFileSize(iBook);
-        //std::cout<<sizeOfFile<<std::endl;
         char* text = new char[sizeOfFile + 1];
         iBook.read(text ,sizeOfFile);
         std::cout<<text;
