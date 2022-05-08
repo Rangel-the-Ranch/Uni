@@ -215,7 +215,8 @@ void book::printBook()const{
         delete []text;
         iBook.close();     
     }
-     
+     std::cout<<std::endl;
+    std::cout<<std::endl;
 }
 
 
@@ -244,6 +245,8 @@ void book::printByPage(const unsigned int linesInPage)const{
         }   
         iBook.close();     
     }
+    std::cout<<std::endl;
+    std::cout<<std::endl;
 }
 
 
@@ -272,6 +275,8 @@ void book::printByNcharacters(const unsigned int symbolsInPage)const{
 
         iBook.close();     
     } 
+    std::cout<<std::endl;
+    std::cout<<std::endl;
 }
 
 
@@ -307,4 +312,6 @@ void book::printBySentence()const{
         }
         iBook.close();
     } 
+    std::cout<<std::endl;
+    std::cout<<std::endl;
 }
