@@ -22,6 +22,7 @@ class library{
         void swapIndex(const size_t A,const size_t B);
         void rankingSort(const bool highestToLowest);
         void titleSort(const bool AtoZ);
+        void authorSort(const bool AtoZ);
         
         void copyFrom(const library& other);
 
@@ -40,8 +41,8 @@ class library{
         void addBook(const book& newBook);
         void removeBook(const unsigned int index);
         
-
-
+        //void rankingSort(const bool highestToLowest);
+        //void titleSort(const bool AtoZ);
 
         void listBooks()const;
         void listByRatingAc()const;

@@ -12,11 +12,11 @@ int main(){
     user A("IvanDebelan" , "password" , 1);
     user B("misho","123456",0);
 
-    book Bone("B1","Ivan","books/book1.txt","tova e purvata knniga",2.7,"11111111");
-    book Btwo("B2","Gosho","books/book2.txt","tova e vtorata knniga",3.14,"2222222");
-    book Bthree("B3","Petur","books/book3.txt","tova e tretata knniga",3,"3333333333");
-    book Bfour("B4","Ivan","books/book4.txt","tova e chetvurta knniga",5.5,"44444444444");
-    book Bfive("B5","don","books/book5.txt","tova e peta knniga",4.2,"5555555");
+    book Bone("dddwpoigjn","Ivan","books/book1.txt","Ctova e purvata",2.7,"11111111");
+    book Btwo("cccowig","Gosho","books/book2.txt","Atova e vtorata",3.14,"2222222");
+    book Bthree("eeewogirwg","Petur","books/book3.txt","Btova e tretata",3,"3333333333");
+    book Bfour("aaavfsorjinv","Ivan","books/book4.txt","Gtova e chetvurta",5.5,"44444444444");
+    book Bfive("bbblewrjgnb","don","books/book5.txt","Ctova e peta",4.2,"5555555");
 
     library lib;
 
@@ -27,6 +27,11 @@ int main(){
     lib.addBook(Bfive);
 
     lib.menu(A);
+
+    //lib.titleSort(false);
+    //lib.rankingSort(true);
+    
+    //lib.listBooks();
     
     //lib.readingMenu(A , 1);
     //lib.swapIndex(1,2);

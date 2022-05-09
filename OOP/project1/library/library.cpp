@@ -1,4 +1,5 @@
 #include<cstring>
+#include<cmath>
 
 void library::free(){
     delete []books;
@@ -88,11 +89,7 @@ void library::removeFileDecision(const unsigned int index){
         std::cout<<"file not removed\n";
     }
 }
-void library::swapIndex(const size_t A ,const size_t B){
-    const book temp = books[A];
-    books[A] = books[B];
-    books[B] = temp;
-}
+
 
 void library::listBooks()const{
     for(size_t i = 0 ; i < this->numberOfBooks; i++){
@@ -405,39 +402,51 @@ void library::listMenu(const user& person){
                     std::cout<<"Invalid input"<<std::endl;
                     listMenu(person);
                 }
-                if(input == 0){
-                    AtoZ = false;
-                }
                 if(input == 1){
                     AtoZ = true;
+                    titleSort(AtoZ);
+                    std::cout<<"0.Back"<<std::endl;
+                    listBooks();
+                    selectBookIndex(person);
+                }
+                if(input == 0){
+                    AtoZ = false;
+                    titleSort(AtoZ);
+                    std::cout<<"0.Back"<<std::endl;
+                    listBooks();
+                    selectBookIndex(person);
                 }
 
                 
 
             }
             if(convInput == 3){
-                std::cout<<"WIP\n";
+                bool AtoZ;
+                std::cout<<"A to Z? (if 0 -> Z to A) (0/1) : \n";
+                int input = getInput();
+                input = validInputConverter(input ,1);
+                if(input == -1){
+                    std::cout<<"Invalid input"<<std::endl;
+                    listMenu(person);
+                }
+                if(input == 1){
+                    AtoZ = true;
+                    authorSort(AtoZ);
+                    std::cout<<"0.Back"<<std::endl;
+                    listBooks();
+                    selectBookIndex(person);
+                }
+                if(input == 0){
+                    AtoZ = false;
+                    authorSort(AtoZ);
+                    std::cout<<"0.Back"<<std::endl;
+                    listBooks();
+                    selectBookIndex(person);
+                }
             }
     }
     //menu(person);
 }
-/*
-void library::titleSort(const bool AtoZ){
-    if(AtoZ == true){
-        int remainingNumberOfBooks = this->numberOfBooks;
-        while(remainingNumberOfBooks > 0){
-            char lowest = 256;
-            size_t lowestIndex;
-            for(int i=0;i<remainingNumberOfBooks;i++){
-                if(this-<books[i].getTitle){
-                    lowest
-                }
-            }
-        }
-    }else{
-
-    }
-}*/
 
 void library::selectBookIndex(const user& person){
     int input =validInputConverter( getInput() , numberOfBooks-1);
@@ -512,4 +521,196 @@ void library::readingMenu(const user& person ,const size_t bookIndex){
             books[bookIndex].printByNcharacters(secInput);
         }
     }
+}
+void library::swapIndex(const size_t A ,const size_t B){
+    if(A >= numberOfBooks || B >= numberOfBooks){
+        std::cout<<"Invalid swap"<<std::endl;
+        return;
+    }
+    const book temp = books[A];
+    books[A] = books[B];
+    books[B] = temp;
+}
+
+void library::titleSort(const bool AtoZ){
+    if(AtoZ == true){
+
+        double* stringValue = new double [ this->numberOfBooks ];
+        size_t highest = 0;
+
+        for(int i=0; i<numberOfBooks;i++){
+            stringValue[i] = 0;
+            size_t bookLen = strlen( books[i].getTitle() );
+            char* allLowercase = new char [ bookLen ];
+            strcpy(allLowercase , books[i].getTitle() );
+            for(int  j=0 ; j<bookLen ; j++){
+                if(allLowercase[j] >= 'A' && allLowercase[j] <= 'Z'){
+                    allLowercase[j] = allLowercase[j] + ('a' - 'A');
+                }
+                stringValue[i] = stringValue[i] + allLowercase[j] * pow(1000 , 0-j);
+
+            }
+            if(stringValue[i] > highest){
+                highest = stringValue[i];
+            }
+            delete []allLowercase;
+        }
+        int remainingNumberOfBooks = this->numberOfBooks;
+
+        while(remainingNumberOfBooks > 0){
+
+            size_t  lowest = highest;
+            size_t lowestIndex;
+            for(int i=0; i<remainingNumberOfBooks; i++){   
+                
+                if( stringValue[i] <= lowest){
+                    
+                    lowest = stringValue[i];
+                    lowestIndex = i;
+                    
+                }
+                
+            }
+        
+            swapIndex(remainingNumberOfBooks-1 , lowestIndex);
+            remainingNumberOfBooks--;
+        }
+        delete []stringValue;
+        
+        int swaper = (numberOfBooks-1)/2;
+        for(int i=0; i<swaper; i++){
+            swapIndex(i,numberOfBooks-1-i);
+        }
+
+    }else{
+        
+        /*
+        size_t* stringValue = new size_t[ this->numberOfBooks ];
+
+        for(int i=0; i<numberOfBooks;i++){
+            stringValue[i] = 0;
+            size_t bookLen = strlen( books[i].getTitle() );
+            char* allLowercase = new char [ bookLen ];
+            strcpy(allLowercase , books[i].getTitle() );
+            for(int  j=0 ; j<bookLen ; j++){
+                if(allLowercase[j] >= 'A' && allLowercase[j] <= 'Z'){
+                    allLowercase[j] = allLowercase[j] + ('a' - 'A');
+                }
+                stringValue[i] = stringValue[i] + allLowercase[j] ;//* pow(1000 , 0-j);
+
+            }
+
+            delete []allLowercase;
+        }
+
+        int remainingNumberOfBooks = this->numberOfBooks;
+        while(remainingNumberOfBooks > 0){
+            double highest = 0;
+            size_t highestIndex;
+            for(int i=0; i<remainingNumberOfBooks; i++){   
+
+                if( stringValue[i] > highest){
+                    highest = stringValue[i];
+                    highestIndex = i;
+                }
+            }
+            swapIndex(remainingNumberOfBooks-1 , highestIndex);
+            remainingNumberOfBooks--;
+        } 
+        delete []stringValue;
+        */
+       double* stringValue = new double [ this->numberOfBooks ];
+        size_t highest = 0;
+
+        for(int i=0; i<numberOfBooks;i++){
+            stringValue[i] = 0;
+            size_t bookLen = strlen( books[i].getTitle() );
+            char* allLowercase = new char [ bookLen ];
+            strcpy(allLowercase , books[i].getTitle() );
+            for(int  j=0 ; j<bookLen ; j++){
+                if(allLowercase[j] >= 'A' && allLowercase[j] <= 'Z'){
+                    allLowercase[j] = allLowercase[j] + ('a' - 'A');
+                }
+                stringValue[i] = stringValue[i] + allLowercase[j] * pow(1000 , 0-j);
+
+            }
+            if(stringValue[i] > highest){
+                highest = stringValue[i];
+            }
+            delete []allLowercase;
+        }
+        int remainingNumberOfBooks = this->numberOfBooks;
+
+        while(remainingNumberOfBooks > 0){
+
+            size_t  lowest = highest;
+            size_t lowestIndex;
+            for(int i=0; i<remainingNumberOfBooks; i++){   
+                
+                if( stringValue[i] <= lowest){
+                    
+                    lowest = stringValue[i];
+                    lowestIndex = i;
+                    
+                }
+                
+            }
+        
+            swapIndex(remainingNumberOfBooks-1 , lowestIndex);
+            remainingNumberOfBooks--;
+        }
+        delete []stringValue;
+    }
+}
+void library::authorSort(const bool AtoZ){
+
+
+    double* stringValue = new double [ this->numberOfBooks ];
+    size_t highest = 0;
+
+    for(int i=0; i<numberOfBooks;i++){
+        stringValue[i] = 0;
+        size_t bookLen = strlen( books[i].getAuthor() );
+        char* allLowercase = new char [ bookLen ];
+        strcpy(allLowercase , books[i].getAuthor() );
+        for(int  j=0 ; j<bookLen ; j++){
+            if(allLowercase[j] >= 'A' && allLowercase[j] <= 'Z'){
+                allLowercase[j] = allLowercase[j] + ('a' - 'A');
+            }
+            stringValue[i] = stringValue[i] + allLowercase[j] * pow(1000 , 0-j);
+
+        }
+        if(stringValue[i] > highest){
+            highest = stringValue[i];
+        }
+        delete []allLowercase;
+    }
+    int remainingNumberOfBooks = this->numberOfBooks;
+
+    while(remainingNumberOfBooks > 0){
+
+        size_t  lowest = highest;
+        size_t lowestIndex;
+        for(int i=0; i<remainingNumberOfBooks; i++){   
+                
+            if( stringValue[i] <= lowest){
+                    
+                lowest = stringValue[i];
+                lowestIndex = i;
+                    
+            }
+                
+        }
+        
+        swapIndex(remainingNumberOfBooks-1 , lowestIndex);
+        remainingNumberOfBooks--;
+    }
+    delete []stringValue;
+        
+    if(AtoZ == true){
+        int swaper = (numberOfBooks-1)/2;
+        for(int i=0; i<swaper; i++){
+            swapIndex(i,numberOfBooks-1-i);
+        }
+    }    
 }

@@ -16,3 +16,6 @@ copyFrom на library не  е завършен
 Подобри addBook
 
 
+problem s  prekaleno golqm description
+
+Автор и Титле ортера неработят
