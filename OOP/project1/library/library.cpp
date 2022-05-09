@@ -306,7 +306,7 @@ void library::menu(const user& person){
                 listMenu(person);
             }
             if(convInput == 2){
-                std::cout<<"WIP\n";
+                searchMenu(person);
             }
             if(convInput == 3){
                 addBookMenu(person);
@@ -327,7 +327,7 @@ void library::menu(const user& person){
                 listMenu(person);
             }
             if(convInput == 2){
-                std::cout<<"WIP\n";
+                searchMenu(person);
             }
         }
     }
@@ -713,4 +713,132 @@ void library::authorSort(const bool AtoZ){
             swapIndex(i,numberOfBooks-1-i);
         }
     }    
+}
+char* library::getInputString()const{
+    char* input = new char[MAX_INPUT_SIZE];
+    std::cin>>input;
+    return input;///////////////////////////////////////////////////////////////////////////////////////
+}
+void library::searchMenu(const user& person){
+    std::cout<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<"0.Back \n";
+    std::cout<<"Search word: ";
+    char* input; 
+    //char* input = new char[MAX_INPUT_SIZE];
+    input = getInputString();
+    //strcpy( input , getInputString() );
+    if( strlen( input ) <= 2 && input == "0\0"){
+        //return;
+    }else{
+        book* isItListed = new book[ this->numberOfBooks ];
+        size_t* indexMaper = new size_t[this->numberOfBooks];
+        for(int i = 0;i<this->numberOfBooks;i++){
+            indexMaper[i] = -1;
+        }
+        size_t numberOfListed = 0;
+        for(int i = 0; i < this->numberOfBooks; i++){
+            if( strcmp(input , books[i].getTitle() ) == 0){
+                isItListed[numberOfListed] = books[i];
+                indexMaper[numberOfListed] = i;
+                numberOfListed++;
+            }else{
+                if( strcmp(input , books[i].getAuthor() ) == 0){
+                    isItListed[numberOfListed] = books[i];
+                    indexMaper[numberOfListed] = i;
+                    numberOfListed++; 
+                }else{
+                    if( strcmp(input , books[i].getIsbn() ) == 0){
+                        isItListed[numberOfListed] = books[i];
+                        indexMaper[numberOfListed] = i;
+                        numberOfListed++; 
+                    }else{
+                        if( strstr(books[i].getDescription() , input ) != nullptr){
+                            isItListed[numberOfListed] = books[i];
+                            indexMaper[numberOfListed] = i;
+                            numberOfListed++; 
+                        }
+                    }
+                }
+            }
+            /*
+            if(isItListed[i].getTitle() != nullptr){
+                indexMaper[numberOfListed-1] = i;
+            }
+            */
+        }
+        
+        std::cout<<std::endl;
+        if(numberOfListed == 0){
+            std::cout<<"No matches";
+            std::cout<<std::endl;
+            delete []isItListed;
+            delete []input;
+            delete []indexMaper;
+            return;
+        }
+        for(int i=0; i < numberOfListed ; i++){
+            
+            std::cout<<i+1<<". ";
+            std::cout<<isItListed[i].getTitle()<<" ";
+            std::cout<<isItListed[i].getAuthor()<<" ";
+            std::cout<<isItListed[i].getRating()<<" ";
+            std::cout<<isItListed[i].getIsbn()<<" ";
+            std::cout<<std::endl;
+        }
+        int secInput = getInput();
+        secInput = validInputConverter(secInput , numberOfListed);
+        std::cout<<secInput;
+        
+            if(secInput == -1){
+                std::cout<<"Invalid input";
+                searchMenu(person);
+            }else{
+                if(secInput == 0){
+                    delete []isItListed;
+                    delete []input;
+                    delete []indexMaper;
+                    return;
+                }else{
+                    secInput--;
+                    std::cout<<indexMaper[secInput]<<"\n";
+                    selectSearchedBookIndex(person , indexMaper[secInput]);
+                }
+            }
+        delete []isItListed;
+        delete []input;
+        delete []indexMaper;
+    }
+}
+void library::selectSearchedBookIndex(const user& person,const  size_t input){
+    if(person.getIsAdmin() == true){
+        printBookProfileAdmin(input);
+        int secInput = validInputConverter(getInput() , 2);
+        if(secInput == -1){
+            std::cout<<"Invalid input"<<std::endl;
+            selectBookIndex(person);
+        }
+        if(secInput == 0){
+            return;
+        }
+        if(secInput == 1){
+            readingMenu(person,input);
+        }
+        if(secInput == 2){
+            removeBook(input);
+        }
+    }else{
+        printBookProfileUser(input);
+        int secInput = validInputConverter(getInput() , 1);
+        if(secInput == -1){
+            std::cout<<"Invalid input"<<std::endl;
+            selectBookIndex(person);
+        }
+        if(secInput == 0){
+            return;
+        }
+        if(secInput == 1){
+            readingMenu(person , input);
+        }
+    }
 }

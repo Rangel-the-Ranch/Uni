@@ -58,11 +58,14 @@ class library{
         void menu(const user& person);
         void listMenu(const user& person);
         void selectBookIndex(const user& person);
+        void selectSearchedBookIndex(const user& person, const size_t input);
         void readingMenu(const user& person ,const size_t boolIndex);
         void addBookMenu(const user& person);
+        void searchMenu(const user& person);
 
         const int validInputConverter(const int input , const unsigned int numberOfCommands)const;
         const int getInput()const;
+        char* getInputString()const;
 
         void printComandsForUser()const;
         void printComandsForAdmin()const;
@@ -70,6 +73,7 @@ class library{
         void printBookProfileUser(const unsigned int index)const;
         void printReadingOptions()const;
         void printListMenu()const;
+        void searchMenu();
 
 
 };

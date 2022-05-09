@@ -6,17 +6,17 @@
 #include"library/library.h"
 #include"library/library.cpp"
 
-
+//rwtsz58y
 
 int main(){
     user A("IvanDebelan" , "password" , 1);
     user B("misho","123456",0);
 
-    book Bone("dddwpoigjn","Ivan","books/book1.txt","Ctova e purvata",2.7,"11111111");
-    book Btwo("cccowig","Gosho","books/book2.txt","Atova e vtorata",3.14,"2222222");
-    book Bthree("eeewogirwg","Petur","books/book3.txt","Btova e tretata",3,"3333333333");
-    book Bfour("aaavfsorjinv","Ivan","books/book4.txt","Gtova e chetvurta",5.5,"44444444444");
-    book Bfive("bbblewrjgnb","don","books/book5.txt","Ctova e peta",4.2,"5555555");
+    book Bone("dddwpoigjn","Ivan","books/book1.txt","trailer",2.7,"11111111");
+    book Btwo("cccowig","Gosho","books/book2.txt","opis",3.14,"2222222");
+    book Bthree("eeewogirwg","Petur","books/book3.txt","diskro",3,"3333333333");
+    book Bfour("aaavfsorjinv","Ivan","books/book4.txt","desk",5.5,"44444444444");
+    book Bfive("bbblewrjgnb","don","books/book5.txt","topan Ivan ortoman",4.2,"5555555");
 
     library lib;
 
@@ -28,9 +28,6 @@ int main(){
 
     lib.menu(A);
 
-    //lib.titleSort(false);
-    //lib.rankingSort(true);
-    
     //lib.listBooks();
     
     //lib.readingMenu(A , 1);
