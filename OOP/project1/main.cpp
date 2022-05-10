@@ -24,8 +24,10 @@ int main(){
     lib.addBook(Btwo);
     lib.addBook(Bthree);
     lib.addBook(Bfour);
-    lib.addBook(Bfive);
+    //lib.addBook(Bfive);
+    lib.importBook("books/book5.txt");
 
+    //Bone.createBookInfoFile();    
     lib.menu(A);
     //lib.listMenu(A);
     //lib.listBooks();

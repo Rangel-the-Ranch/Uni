@@ -1,0 +1,6 @@
+cccowig
+Gosho
+books/book2.txt
+3.14
+2222222
+opis

@@ -823,3 +823,31 @@ void library::selectSearchedBookIndex(const user& person,const  size_t input){
         }
     }
 }
+
+void library::importBook(const char* bookLocation){
+    char* descLocation = new char [ strlen(bookLocation) + 10];
+    strcpy(descLocation, "data/");
+    strcat(descLocation,bookLocation);
+    std::ifstream iBook( descLocation);
+    delete []descLocation;
+    if(iBook.is_open() != true){
+        std::cout<<"Cannot open file! \n";
+        return;
+    }
+    char title[MAX_INPUT_SIZE];
+    char author[MAX_INPUT_SIZE];
+    char location[MAX_INPUT_SIZE];
+    double rating;
+    char isbn[MAX_INPUT_SIZE];
+    char description[MAX_INPUT_SIZE];
+    //iBook.read(author , get)
+    iBook>>title;
+    iBook>>author;
+    iBook>>location;
+    iBook>>rating;
+    iBook>>isbn;
+    iBook>>description;
+    iBook.close();
+    book newBook(title,author,location,description,rating,isbn);
+    addBook(newBook);
+}

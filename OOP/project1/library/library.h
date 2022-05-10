@@ -74,6 +74,8 @@ class library{
         void printBookProfileUser(const unsigned int index)const;
         void printReadingOptions()const;
         void printListMenu()const;
+
+        void importBook(const char* bookLocation);
        
 
 

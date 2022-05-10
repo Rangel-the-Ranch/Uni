@@ -95,6 +95,7 @@ book::book(const char* newTitle ,  const char* newAuthor, const char* newLocatio
         //std::cout<<"Invalid Isbn";
         this->isbn = nullptr;
     }
+    createBookInfoFile();
 
 
 }
@@ -150,6 +151,9 @@ void book::setRating(const double newRating){
 }
 const double book::getRating()const{
     return this->rating;
+}
+const char* book::getRatingAsString()const{
+
 }
 void book::setIsbn(const char* newIsbn){
     if( validIsbn(newIsbn) == true ){
@@ -297,4 +301,29 @@ void book::printBySentence()const{
     } 
     std::cout<<std::endl;
     std::cout<<std::endl;
+}
+
+void book::createBookInfoFile()const{
+    char* descLocation = new char [ strlen(getLocation()) + 10];
+    strcpy(descLocation, "data/");
+    strcat(descLocation,getLocation());
+    std::ofstream oBook( descLocation , std::ios::trunc );
+    delete []descLocation;
+    if(oBook.is_open() != true){
+        std::cout<<"Cannot open file! \n";
+        return;
+    }
+    oBook.write(this->title , strlen(title));
+    oBook<<std::endl;
+    oBook.write(this->author , strlen(author));
+    oBook<<std::endl;
+    oBook.write(this->location , strlen(location));
+    oBook<<std::endl;
+    oBook<<rating;
+    oBook<<std::endl;
+    oBook.write(this->isbn , strlen(isbn));
+    oBook<<std::endl;
+    oBook.write(this->description , strlen(description));
+    oBook<<std::endl;
+    oBook.close();
 }

@@ -50,6 +50,7 @@ class book{
         const char* getLocation()const;
         const char* getDescription()const;
         const double getRating()const;
+        const char* getRatingAsString()const;
         const char* getIsbn()const;
 
         void removeFile();
@@ -58,6 +59,8 @@ class book{
         void printByPage(const unsigned int linesInPage)const;
         void printByNcharacters(const unsigned int symbolsInPage)const;
         void printBySentence()const;
+
+        void createBookInfoFile()const;
 
         
 };
