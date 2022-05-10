@@ -26,8 +26,8 @@ int main(){
     lib.addBook(Bfour);
     lib.addBook(Bfive);
 
-    //lib.menu(A);
-    lib.listMenu(A);
+    lib.menu(A);
+    //lib.listMenu(A);
     //lib.listBooks();
     
     //lib.readingMenu(A , 1);

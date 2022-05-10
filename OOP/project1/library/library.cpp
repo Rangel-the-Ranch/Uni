@@ -704,7 +704,7 @@ void library::searchMenu(const user& person){
     std::cout<<std::endl;
     std::cout<<"0.Back \n";
     std::cout<<"Search word: ";
-    char* input; 
+    char* input = new char[MAX_INPUT_SIZE]; 
     //char* input = new char[MAX_INPUT_SIZE];
     //input = getInputString();
     strcpy( input , getInputString() );
@@ -750,11 +750,12 @@ void library::searchMenu(const user& person){
         
         std::cout<<std::endl;
         if(numberOfListed == 0){
-            std::cout<<"No matches";
+            std::cout<<"No matches\n\n";
             std::cout<<std::endl;
             delete []isItListed;
             delete []input;
             delete []indexMaper;
+            
             return;
         }
         for(int i=0; i < numberOfListed ; i++){
@@ -767,11 +768,11 @@ void library::searchMenu(const user& person){
             std::cout<<std::endl;
         }
         int secInput = getInput();
-        secInput = validInputConverter(secInput , numberOfListed);
-        std::cout<<secInput;
+        secInput = validInputConverter(secInput , numberOfListed-1);
+        //std::cout<<numberOfListed<<std::endl;
         
-            if(secInput == -1){
-                std::cout<<"Invalid input";
+            if(secInput == -1 || secInput>numberOfListed){
+                std::cout<<"Invalid input\n";
                 searchMenu(person);
             }else{
                 if(secInput == 0){
@@ -781,7 +782,7 @@ void library::searchMenu(const user& person){
                     return;
                 }else{
                     secInput--;
-                    std::cout<<indexMaper[secInput]<<"\n";
+                    //std::cout<<indexMaper[secInput]<<"\n";
                     selectSearchedBookIndex(person , indexMaper[secInput]);
                 }
             }
@@ -795,7 +796,7 @@ void library::selectSearchedBookIndex(const user& person,const  size_t input){
         printBookProfileAdmin(input);
         int secInput = validInputConverter(getInput() , 2);
         if(secInput == -1){
-            std::cout<<"Invalid input"<<std::endl;
+            std::cout<<"Invalid input\n"<<std::endl;
             selectBookIndex(person);
         }
         if(secInput == 0){
@@ -811,7 +812,7 @@ void library::selectSearchedBookIndex(const user& person,const  size_t input){
         printBookProfileUser(input);
         int secInput = validInputConverter(getInput() , 1);
         if(secInput == -1){
-            std::cout<<"Invalid input"<<std::endl;
+            std::cout<<"Invalid input\n"<<std::endl;
             selectBookIndex(person);
         }
         if(secInput == 0){
