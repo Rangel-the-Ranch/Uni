@@ -1,10 +1,6 @@
-
-//#include<iostream>
 #include<iostream>
 #include<cstring>
 #include<fstream>
-//#include"book.h"
-//using namespace std;
 
 void book::free(){
     delete []this->title;

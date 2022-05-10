@@ -1,8 +1,5 @@
 #pragma once
 
-//#include<fstream>
-//#include<cstring>
-
 class book{
     private:
         char* title;
@@ -13,12 +10,7 @@ class book{
         char* isbn;
         static const unsigned int LINES_BETWEEN_PAGES = 3;
         static const unsigned int MAX_SYMBOLS_IN_LINE = 1024;
-        /*
-        const char endSymbols[3] = {'.' , '!' , '?'}; //////////////////////static
-        static const int NUMBER_OF_END_SYMBOLS = sizeOf(endSymbols);
-        */
-        //int sizeOfFile;
-        //static const  char* defaultParameter;
+
 
         void free();
         const double  validRatingConverter(const double rate)const;
@@ -29,7 +21,7 @@ class book{
         
 
         void copyFrom(const book& other);
-
+        //void removeFile();
     public:
 
         book& operator=(const book& other);

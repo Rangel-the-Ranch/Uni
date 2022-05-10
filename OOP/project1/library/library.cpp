@@ -1,6 +1,3 @@
-#include<cstring>
-#include<cmath>
-
 void library::free(){
     delete []books;
 }
@@ -28,10 +25,8 @@ void library::copyFrom(const library& other){
     this->numberOfBooks = other.getNumberOfBooks();
     this->sizeOfLibrary = other.getSizeOfLibrary();
     
-    //this->books = new book [ this->sizeOfLibrary ];
-
-
-
+    this->books = new book [ this->sizeOfLibrary ];
+    this->books = other.books;
 }
 
 library::library(){
@@ -134,21 +129,6 @@ void library::rankingSort(const bool highestToLowest){
             swapIndex(remainingNumberOfBooks-1 , lowestIndex);
             remainingNumberOfBooks--;
         } 
-    }
-}
-
-
-void library::listByRatingAc()const{
-    //book* sortArr = new book [numberOfBooks];
-    
-
-    for(size_t i = 0 ; i < this->numberOfBooks; i++){
-        std::cout<<this->books[i].getTitle()<<" ";
-        std::cout<<this->books[i].getAuthor()<<" ";
-        std::cout<<"rating: "<<books[i].getRating()<<" ";
-        std::cout<<this->books[i].getIsbn();
-        std::cout<<std::endl;
-        std::cout<<std::endl;
     }
 }
 
@@ -334,27 +314,49 @@ void library::menu(const user& person){
     menu(person);
 }
 void library::addBookMenu(const user& person){
-    char title[MAX_INPUT_SIZE];
-    char author[MAX_INPUT_SIZE];
-    char ISNB [MAX_INPUT_SIZE];
-    char location[MAX_INPUT_SIZE];
-    char description[MAX_INPUT_SIZE];
-    double rating;
-    std::cout<<"Title: ";
-    std::cin>>title;
-    std::cout<<"Author: ";
-    std::cin>>author;
-    std::cout<<"ISNB: ";
-    std::cin>>ISNB;
-    std::cout<<"Location: ";
-    std::cin>>location;
-    std::cout<<"Rating: ";
-    std::cin>>rating;
-    std::cout<<"Description: ";
-    std::cin>>description;
-    book temp(title,author,location,description,rating,ISNB);
-    addBook(temp);
-    std::cout<<"Book added succsefuly"<<std::endl;
+    std::cout<<std::endl<<std::endl;
+    std::cout<<"0.Back"<<std::endl;
+    std::cout<<"1.Import from file"<<std::endl;
+    std::cout<<"2.Write"<<std::endl;
+
+    int input = getInput();
+    int convInput = validInputConverter(input , 2);
+    if(convInput == -1){
+        std::cout<<"Invalid input!\n";
+        addBookMenu(person);
+    }
+    if(convInput == 0){
+        return;
+    }
+    if(convInput == 1){
+        char location[MAX_INPUT_SIZE];
+        std::cout<<"Location of the book: ";
+        std::cin>>location;
+        importBook(location);
+    }
+    if(convInput == 2){
+        char title[MAX_INPUT_SIZE];
+        char author[MAX_INPUT_SIZE];
+        char ISNB [MAX_INPUT_SIZE];
+        char location[MAX_INPUT_SIZE];
+        char description[MAX_INPUT_SIZE];
+        double rating;
+        std::cout<<"Title: ";
+        std::cin>>title;
+        std::cout<<"Author: ";
+        std::cin>>author;
+        std::cout<<"ISNB: ";
+        std::cin>>ISNB;
+        std::cout<<"Location: ";
+        std::cin>>location;
+        std::cout<<"Rating: ";
+        std::cin>>rating;
+        std::cout<<"Description: ";
+        std::cin>>description;
+        book temp(title,author,location,description,rating,ISNB);
+        addBook(temp);
+        std::cout<<"Book added succsefuly"<<std::endl;
+    }
 
 }
 void library::listMenu(const user& person){
@@ -704,7 +706,7 @@ void library::searchMenu(const user& person){
     std::cout<<std::endl;
     std::cout<<"0.Back \n";
     std::cout<<"Search word: ";
-    char* input = new char[MAX_INPUT_SIZE]; 
+    char* input; 
     //char* input = new char[MAX_INPUT_SIZE];
     //input = getInputString();
     strcpy( input , getInputString() );
