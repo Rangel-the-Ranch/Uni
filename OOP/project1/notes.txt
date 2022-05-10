@@ -18,7 +18,5 @@ copyFrom на library не  е завършен
 
 problem s  prekaleno golqm description
 
-Автор и Титле ортера неработят strstr / strcmp
-
 
 strlen + 1 навсякъде

@@ -23,6 +23,7 @@ class library{
         void rankingSort(const bool highestToLowest);
         void titleSort(const bool AtoZ);
         void authorSort(const bool AtoZ);
+        const bool isLowerWord(const char* a, const char* b)const;
         
         void copyFrom(const library& other);
 
@@ -65,7 +66,7 @@ class library{
 
         const int validInputConverter(const int input , const unsigned int numberOfCommands)const;
         const int getInput()const;
-        char* getInputString()const;
+        const char* getInputString()const;
 
         void printComandsForUser()const;
         void printComandsForAdmin()const;
@@ -73,7 +74,7 @@ class library{
         void printBookProfileUser(const unsigned int index)const;
         void printReadingOptions()const;
         void printListMenu()const;
-        void searchMenu();
+       
 
 
 };
