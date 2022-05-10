@@ -10,6 +10,7 @@ class book{
         char* isbn;
         static const unsigned int LINES_BETWEEN_PAGES = 3;
         static const unsigned int MAX_SYMBOLS_IN_LINE = 1024;
+        static const size_t MAX_SYMBOLS_IN_PARAM = 100;
 
 
         void free();
@@ -42,7 +43,6 @@ class book{
         const char* getLocation()const;
         const char* getDescription()const;
         const double getRating()const;
-        const char* getRatingAsString()const;
         const char* getIsbn()const;
 
         void removeFile();

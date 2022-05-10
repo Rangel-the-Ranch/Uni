@@ -108,6 +108,11 @@ book::~book(){
 }
 
 void book::setTitle(const char* newTitle){
+    if(strlen(newTitle) > MAX_SYMBOLS_IN_PARAM ){
+        delete []this->title;
+        this->title = nullptr;
+        return;
+    }
     delete []this->title;
     this->title = new char [ sizeof(newTitle) + 1 ];
     strcpy(this->title , newTitle);
@@ -117,6 +122,11 @@ const char* book::getTitle()const {
 }
 
 void book::setAuthor(const char* newAuthor){
+    if(strlen(newAuthor) > MAX_SYMBOLS_IN_PARAM ){
+        delete []this->author;
+        this->author = nullptr;
+        return;
+    }
     delete []this->author;
     this->author = new char [ sizeof(newAuthor) + 1 ];
     strcpy(this->author , newAuthor);
@@ -126,6 +136,11 @@ const char* book::getAuthor()const {
 }
 
 void book::setLocation(const char* newLocation){
+    if(strlen(location) > MAX_SYMBOLS_IN_PARAM ){
+        delete []this->location;
+        this->location = nullptr;
+        return;
+    }
     delete []this->location;
     this->location = new char [ sizeof(newLocation) + 1 ];
     strcpy(this->location , newLocation);
@@ -135,6 +150,11 @@ const char* book::getLocation()const {
 }
 
 void book::setDescription(const char* newDescription){
+    if(strlen(newDescription) > MAX_SYMBOLS_IN_PARAM ){
+        delete []this->description;
+        this->description = nullptr;
+        return;
+    }
     delete []this->description;
     this->description = new char [ sizeof(newDescription) + 1 ];
     strcpy(this->description , newDescription);
@@ -148,10 +168,13 @@ void book::setRating(const double newRating){
 const double book::getRating()const{
     return this->rating;
 }
-const char* book::getRatingAsString()const{
 
-}
 void book::setIsbn(const char* newIsbn){
+    if(strlen(newIsbn) > MAX_SYMBOLS_IN_PARAM ){
+        delete []this->isbn;
+        this->isbn = nullptr;
+        return;
+    }
     if( validIsbn(newIsbn) == true ){
         delete []this->isbn;
         this->isbn = new char [ sizeof(newIsbn) + 1 ];

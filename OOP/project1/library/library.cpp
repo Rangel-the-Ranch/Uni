@@ -223,10 +223,12 @@ const int library::getInput()const{
 }
 
 void library::printComandsForUser()const{
+    std::cout<<"0.Exit"<<std::endl;
     std::cout<<"1.Book list"<<std::endl;
     std::cout<<"2.Search"<<std::endl;
 }
 void library::printComandsForAdmin()const{
+    std::cout<<"0.Exit"<<std::endl;
     std::cout<<"1.Book list"<<std::endl;
     std::cout<<"2.Search"<<std::endl;
     std::cout<<"3.Add book"<<std::endl;
@@ -279,8 +281,11 @@ void library::menu(const user& person){
             std::cout<<"Invalid command!"<<std::endl;
         }else{
             if(convInput == 0){
+                std::cout<<"Author: Rangel Plachkov";
+                std::cout<<std::endl;
+                std::cout<<"1MI0800061";
                 return;
-                std::cout<<"WIP\n";
+                
             }
             if(convInput == 1){
                 listMenu(person);
@@ -300,8 +305,11 @@ void library::menu(const user& person){
             std::cout<<"Invalid command!"<<std::endl;
         }else{
             if(convInput == 0){
+                std::cout<<"Author: Rangel Plachkov";
+                std::cout<<std::endl;
+                std::cout<<"1MI0800061";
                 return;
-                std::cout<<"WIP\n";
+                
             }
             if(convInput == 1){
                 listMenu(person);
