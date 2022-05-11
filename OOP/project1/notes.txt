@@ -1,11 +1,5 @@
 Оправи разделното компилиране
 
-isbn няма проверка за валидност
-При невалиден Isbn може да trow-ва грешка засега е с nullptr;
-
-
-copyFrom на library не  е завършен
-
 
 problem s  prekaleno golqm description
 

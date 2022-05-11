@@ -1,7 +1,7 @@
 #include<iostream>
-#include<fstream>
 #include<cstring>
 #include<cmath>
+#include<fstream>
 
 #include"user/user.h"
 #include"user/user.cpp"
@@ -9,15 +9,20 @@
 #include"library/library.h"
 #include"library/library.cpp"
 
-//rwtsz58y
+
+//wyis2tm5
+
+
+//! Максимален размер на input  при login
 const size_t MAX_INPUT = 100;
+//! user който се използва при грешни данни в login
 const user Guess("Guest" , "guest" , 0);
 
 size_t numberOfUsers = 8;
 user* users = new user[numberOfUsers];
 library lib;
 
-
+//! Функция login която връща user-a който си е въвел данните. Ако те са грешни автоматично връща guess който не е админ
 const user& login(){
     
     char input[MAX_INPUT];
@@ -61,20 +66,26 @@ int main(){
     users[6].setAll("Ivo","ivo20102002",1);
     users[7].setAll("Papagal","wgopuwgog(^2871280g",0);
 
-    //Guess.createUserFile();
+    Guess.createUserFile();
     book Bone("midas","myth","books/midas.txt","golden touch",3.7,"11111111");
     book Btwo("moonLanding","history.com","books/moonLanding.txt","1969 moonlading",4.8,"2222222");
-    book Bthree("eeewogirwg","Petur","books/book3.txt","diskro",3,"3333333333");
-    book Bfour("aaavfsorjinv","Ivan","books/book4.txt","desk",5.5,"44444444444");
-    book Bfive("bbblewrjgnb","don","books/book5.txt","topan Ivan ortoman",4.2,"5555555");
+    book Bthree("Elizabeth2","britannica.com","books/queenElizabeth.txt","The queen of england",1.8,"333");
+    
+    book Bfour("TheGreatGatsby","F. Fitzgerald","books/TheGreatGatsby.txt","book sumunary",5.0,"44444444444");
+    book Bfive("Sonnets","Willian Shekspere","books/sonnets.txt","some SHekespere sonnets",4.9,"55555555");
 
-    Bone.createBookInfoFile();
-    Btwo.createBookInfoFile();
+    //Bone.createBookInfoFile();
+    //Btwo.createBookInfoFile();
 
     lib.addBook(Bone);
     lib.addBook(Btwo);
     lib.addBook(Bthree);
     lib.addBook(Bfour);
+    lib.addBook(Bfive);
+    //std::cout<<"KRAI";
+
+    //std::cout<<Bfive.getIsbn();
+
 
     lib.menu( login() );
      

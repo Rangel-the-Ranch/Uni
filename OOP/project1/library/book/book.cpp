@@ -23,7 +23,21 @@ const double book::validRatingConverter(const double rate)const {
     return 1;
 }
 const bool book::validIsbn(const char* checkIsbn)const{
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    const size_t strLen = strlen(checkIsbn);
+    if(strLen > 13){
+        return false;
+    }
+    for(int i = 0; i<strLen; i++){
+        if(checkIsbn[i] == '0' || checkIsbn[i] == '1' || checkIsbn[i] == '2' ||
+            checkIsbn[i] == '3' || checkIsbn[i] == '4' || checkIsbn[i] == '5' ||
+            checkIsbn[i] == '6' || checkIsbn[i] == '7' || checkIsbn[i] == '8' ||
+            checkIsbn[i] == '9'){
+                
+        }else{
+            return false;
+        }
+    }
     return true;
 }
 const size_t book::getFileSize(std::ifstream& iFile)const{
@@ -70,6 +84,7 @@ book::book(const book& other){
 }
 
 book::book(const char* newTitle ,  const char* newAuthor, const char* newLocation , const char* newDescription , double newRating ,const char* newIsbn){
+
     this->title = new char[ sizeof(newTitle) + 1 ];
     strcpy(this->title , newTitle);
 
@@ -79,11 +94,14 @@ book::book(const char* newTitle ,  const char* newAuthor, const char* newLocatio
     this->location = new char[ sizeof(newLocation) + 1 ];
     strcpy(this->location , newLocation);
 
-    this->description = new char[ sizeof(newDescription) + 1 ];
+    
+    this->description = new char[ strlen(newDescription) + 1 ];
     strcpy(this->description , newDescription);
     
+
     setRating( newRating );
 
+    
     if( validIsbn(newIsbn) == true ){
         this->isbn = new char[ sizeof(newIsbn) + 1 ];
         strcpy(this->isbn , newIsbn);
