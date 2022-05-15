@@ -10,7 +10,6 @@
 #include"library/library.cpp"
 
 
-//wyis2tm5
 
 
 //! Максимален размер на input  при login
