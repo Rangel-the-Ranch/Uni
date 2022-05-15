@@ -1,7 +1,6 @@
 Оправи разделното компилиране
 
 
-problem s  prekaleno golqm description
 
 
 
