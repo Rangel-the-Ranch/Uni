@@ -81,3 +81,9 @@ XMLelement& XMLelement::operator=(const XMLelement& other){
     }
     return *this;
 }
+void XMLelement::setParent(XMLelement* newParentAdr){
+    parent = newParentAdr;
+}
+ XMLelement* XMLelement::getParentAdr()const{
+    return parent;
+}

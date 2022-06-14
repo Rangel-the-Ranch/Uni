@@ -3,18 +3,6 @@
  #include<cstring>
 
  class XMLelement{
-    private:
-        static const size_t DEFAULT_ATRIBUTE_ARR_SIZE = 16;
-        size_t numberOfAtributes = 0;
-        size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;
-        myString id;
-        myString text;
-        atribute* atributes;
-        
-        void resizeAtributeArr();
-        void free();
-        void copyFrom(const XMLelement& other);
-
     public:
         XMLelement();
         XMLelement(const XMLelement& other);
@@ -31,5 +19,24 @@
         void setText(const char* newText);
         const char* getText()const;
 
+        void setParent(XMLelement* newParentAdr);
+        XMLelement* getParentAdr()const;
+        
         XMLelement& operator=(const XMLelement& other);
+
+    private:
+
+        static const size_t DEFAULT_ATRIBUTE_ARR_SIZE = 16;
+        atribute* atributes;
+        XMLelement* parent = nullptr;
+        //XMLelement* child = nullptr;
+        size_t numberOfAtributes = 0;
+        size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;   
+        myString id;
+        myString text;
+
+        void resizeAtributeArr();
+        void free();
+        void copyFrom(const XMLelement& other);
+
  };

@@ -4,13 +4,6 @@
 
 
 class myString{
-    private:
-        char* str;
-        size_t size;
-
-        void copyFrom(const myString& other);
-        void free();
-        void concatFrom(const myString& other);
     public:
 
         myString();
@@ -28,7 +21,13 @@ class myString{
         myString& operator=(const myString& other);
         myString& operator=(myString&& other);
         myString& operator+=(const myString& other);
+    private:
+        char* str;
+        size_t size;
 
+        void copyFrom(const myString& other);
+        void free();
+        void concatFrom(const myString& other);
        
        
 };

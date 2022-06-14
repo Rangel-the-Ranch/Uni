@@ -13,11 +13,7 @@ void atribute::setValue(const char* newValue){
     value = newValue;
 }
 bool atribute::withoutValue()const{
-    if(value.isEmpty() == true ){
-        return false;
-    }else{
-        return true;
-    }
+    return !value.isEmpty();
 }
 atribute::atribute(const char* newName , const char* newValue){
     name = newName;
