@@ -1,5 +1,7 @@
 #pragma once
+#include <iostream>
 #include<cstring>
+
 
 class myString{
     private:
@@ -21,9 +23,13 @@ class myString{
 
         size_t getSize()const;
         const char* get()const;
+        bool isEmpty()const;
 
         myString& operator=(const myString& other);
         myString& operator=(myString&& other);
         myString& operator+=(const myString& other);
-        
+        bool operator==(const myString& other);
+       
+       
 };
+bool operator==(const myString& left , const myString& right);

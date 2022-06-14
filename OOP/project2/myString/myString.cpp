@@ -1,8 +1,5 @@
 #include "MyString.h"
 
-#include <iostream>
-#include <cstring>
-
 void myString::free(){
     delete []str;
 }
@@ -98,4 +95,26 @@ myString& myString::operator=(myString&& other){
 myString& myString::operator+=(const myString& other){
     concatFrom(other);
     return *this;
+}
+bool myString::isEmpty()const{
+    if(str[0] == '\0' ){
+        return true;
+    }else{
+        return false;
+    }
+}
+ bool myString::operator==( const myString& other ){
+    if( strcmp( str , other.get() ) == 0 ){
+        return true;
+    }else{
+        return false;
+    }
+ }
+
+bool operator==(const myString& left , const myString& right){
+    if( strcmp(left.get() , right.get() ) == 0 ){
+        return true;
+    }else{
+        return false;
+    }
 }
