@@ -10,7 +10,7 @@
 int main(){
     myString A("baklava");
     myString B("baklava");
-    //std::cout<< ("baklava" == A) ;
+    std::cout<< ("baklava" == A) ;
     //std::cout<< (A == "baklava") ;
     //XMLelement gosho;
     //std::cout<<gosho.getId();

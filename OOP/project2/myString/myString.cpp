@@ -103,18 +103,8 @@ bool myString::isEmpty()const{
         return false;
     }
 }
- bool myString::operator==( const myString& other ){
-    if( strcmp( str , other.get() ) == 0 ){
-        return true;
-    }else{
-        return false;
-    }
- }
 
 bool operator==(const myString& left , const myString& right){
-    if( strcmp(left.get() , right.get() ) == 0 ){
-        return true;
-    }else{
-        return false;
-    }
+    return !strcmp(left.get() , right.get() );
+    
 }

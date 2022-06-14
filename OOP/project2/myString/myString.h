@@ -28,7 +28,7 @@ class myString{
         myString& operator=(const myString& other);
         myString& operator=(myString&& other);
         myString& operator+=(const myString& other);
-        bool operator==(const myString& other);
+
        
        
 };
