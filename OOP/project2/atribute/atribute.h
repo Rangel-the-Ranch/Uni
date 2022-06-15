@@ -1,8 +1,8 @@
 #pragma once
-class atribute{
+class Atribute{
     public:
-        atribute() = default;
-        atribute(const char* newName , const char* newValue);
+        Atribute() = default;
+        Atribute(const char* newName , const char* newValue);
 
         void setName(const char* newName);
         const char* getName()const;

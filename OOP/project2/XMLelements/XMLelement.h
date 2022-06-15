@@ -11,32 +11,40 @@
         void setId(const char* newId);
         const char* getId()const;
 
-        void addAtribute(const atribute& newAtribute);
-        const atribute* getAtributes()const;
-        const atribute* searchAtribute(const char* searchName)const;
-        const atribute* getAtributeNum(const size_t number)const;
+        void addAtribute(const Atribute& newAtribute);
+        const Atribute* getAtributes()const;
+        const Atribute* searchAtribute(const char* searchName)const;
+        const Atribute* getAtributeNum(const size_t number)const;
 
         void setText(const char* newText);
         const char* getText()const;
 
         void setParent(XMLelement* newParentAdr);
         XMLelement* getParentAdr()const;
+
+        void addChild(XMLelement* newChild);
+        XMLelement** getChilds()const;
+        XMLelement* getChildByIndex(const size_t index)const;
         
         XMLelement& operator=(const XMLelement& other);
 
     private:
 
         static const size_t DEFAULT_ATRIBUTE_ARR_SIZE = 16;
-        atribute* atributes;
+        static const size_t DEFAULT_CHILD_ARR_SIZE = 1;
+        Atribute* atributes;
         XMLelement* parent = nullptr;
-        //XMLelement* child = nullptr;
+        XMLelement** childs = nullptr;
         size_t numberOfAtributes = 0;
         size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;   
+        size_t numberOfChilds = 0;
+        size_t sizeOfChildArr = DEFAULT_CHILD_ARR_SIZE;
         myString id;
         myString text;
 
         void resizeAtributeArr();
+        void resizeChildArr();
         void free();
-        void copyFrom(const XMLelement& other);
+        void copyFrom(const XMLelement& other);///////////////////////////
 
  };
