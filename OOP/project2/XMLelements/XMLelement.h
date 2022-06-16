@@ -22,12 +22,12 @@
         void setText(const char* newText);
         const char* getText()const;
 
-        void setParent(XMLelement* newParentAdr);
-        XMLelement* getParentAdr()const;
+        void setParent(const myString& newParentAdr);
+        const myString& getParent()const;
 
-        void addChild(XMLelement* newChild);
-        XMLelement** getChildren()const;
-        XMLelement* getChildByIndex(const size_t index)const;
+        void addChild(const myString& newChild);
+        const myString* getChildren()const;
+        const myString& getChildByIndex(const size_t index)const;
         
         XMLelement& operator=(const XMLelement& other);
 
@@ -37,8 +37,8 @@
         static const size_t DEFAULT_CHILD_ARR_SIZE = 16;
 
         Atribute* atributes;
-        XMLelement* parent = nullptr;
-        XMLelement** children = nullptr;
+        myString parent= "_";
+        myString* children = nullptr;
         size_t numberOfAtributes = 0;
         size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;   
         size_t numberOfChilds = 0;
