@@ -1,4 +1,4 @@
-#include"atribute.h";
+#include"atribute.h"
 
 const char* Atribute::getName()const{
     return name.get();
@@ -18,4 +18,7 @@ bool Atribute::withoutValue()const{
 Atribute::Atribute(const char* newName , const char* newValue){
     name = newName;
     value = newValue;
+}
+Atribute::Atribute(const char* newName){
+    setName(newName);
 }

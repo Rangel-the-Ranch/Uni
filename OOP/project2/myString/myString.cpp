@@ -52,21 +52,10 @@ size_t getNumSize(size_t number){
 	}
 	return res;
 }
-myString::myString(size_t number){
-    size = getNumSize(number);
 
-    str = new char[size + 1];
-    str[size] ='\0';
-    
-    for(int i=0; i < size; i++){
-        str[size - 1 - i] = (number % 10) + '0';
-        number = number/10;    
-    }
-
-
-}
 
 myString::~myString(){
+    //std::cout<<"deletos";
     free();
 }
 size_t myString::getSize()const{
@@ -83,6 +72,7 @@ myString& myString::operator=(const myString& other){
     }
     return *this;
 }
+
 myString& myString::operator=(myString&& other){
     if( this != &other){
         free();
@@ -96,6 +86,7 @@ myString& myString::operator+=(const myString& other){
     concatFrom(other);
     return *this;
 }
+
 bool myString::isEmpty()const{
     if(str[0] == '\0' ){
         return true;
@@ -107,4 +98,50 @@ bool myString::isEmpty()const{
 bool operator==(const myString& left , const myString& right){
     return !strcmp(left.get() , right.get() );
     
+}
+void myString::removeFirstNsymbols(const size_t N){
+    char* temp = new char[size-N+1];
+    for(size_t i=N; i <= size; i++){
+        temp[i-N] = str[i];
+    }
+    delete []str;
+    str = temp;
+    size=size-N;
+    temp = nullptr;
+}
+size_t myString::strstr(const myString& searchStr)const{
+    
+    for(size_t i=0; i<size; i++){
+        for(size_t j=0; j<searchStr.size ; j++){
+            if(str[i+j] != searchStr.str[j] ){
+
+                break;
+            }else{
+                if(j+1 == searchStr.size){
+                    return i;
+                }
+            }
+        }
+    }
+    return size+1;
+}
+
+myString::myString(size_t number){
+    size = getNumSize(number);
+
+    str = new char[size + 1];
+    str[size] ='\0';
+    
+    for(size_t i=0; i < size; i++){
+        str[size - 1 - i] = (number % 10) + '0';
+        number = number/10;    
+    }
+
+
+}
+myString::myString(const char newSym){
+    str = new char[ 2 ];
+    size = 1;
+    str[0] = newSym;
+    str[1] = '\0';
 }

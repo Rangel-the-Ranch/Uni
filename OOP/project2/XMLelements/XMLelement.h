@@ -4,7 +4,10 @@
 
  class XMLelement{
     public:
+        static size_t uniqueIdNum;
+
         XMLelement();
+        XMLelement(const char* newId);
         XMLelement(const XMLelement& other);
         ~XMLelement();
 
@@ -23,18 +26,19 @@
         XMLelement* getParentAdr()const;
 
         void addChild(XMLelement* newChild);
-        XMLelement** getChilds()const;
+        XMLelement** getChildren()const;
         XMLelement* getChildByIndex(const size_t index)const;
         
         XMLelement& operator=(const XMLelement& other);
 
     private:
-
+        static const char UNIQUE_ID_SYMBOL = '_';
         static const size_t DEFAULT_ATRIBUTE_ARR_SIZE = 16;
-        static const size_t DEFAULT_CHILD_ARR_SIZE = 1;
+        static const size_t DEFAULT_CHILD_ARR_SIZE = 16;
+
         Atribute* atributes;
         XMLelement* parent = nullptr;
-        XMLelement** childs = nullptr;
+        XMLelement** children = nullptr;
         size_t numberOfAtributes = 0;
         size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;   
         size_t numberOfChilds = 0;
@@ -45,6 +49,6 @@
         void resizeAtributeArr();
         void resizeChildArr();
         void free();
-        void copyFrom(const XMLelement& other);///////////////////////////
+        void copyFrom(const XMLelement& other);
 
  };

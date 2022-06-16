@@ -3,6 +3,7 @@ class Atribute{
     public:
         Atribute() = default;
         Atribute(const char* newName , const char* newValue);
+        Atribute(const char* newName);
 
         void setName(const char* newName);
         const char* getName()const;

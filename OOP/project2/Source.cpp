@@ -12,29 +12,26 @@
 #include"Parser/Parser.h"
 #include"Parser/Parser.cpp"
 
+size_t XMLelement::uniqueIdNum = 1;
+
 int main(){
+    
+    //Parser kur;
+    //kur.incertFile("testTXT.TXT");
     /*
-    XMLelement parent;
-    XMLelement child;
-    XMLelement childB;
-    XMLelement childC;
-    parent.setId("fruit");
-    child.setId("banan");
-    childB.setId("domad");
-    childC.setId("krusha");
-    child.setParent(&parent);
-    childB.setParent(&parent);
-    childC.setParent(&parent);
-    parent.addChild(&child);
-    parent.addChild(&childB);
-    parent.addChild(&childC);
+    XMLelement A;
+    kur.addElement(A);
+    kur.getElementByIndex(0)->getText();
+    kur.m_edit->setText("jaba");
+    std::cout<<kur.getElementByIndex(0)->getText();
+    kur.print();
     */
-    //parent.getChildByIndex(0) ->setId("kartof");
-    //std::cout<<childC.getId();
-    //child.getParentAdr()->setId("portokal");
-    //std::cout<< parent.getId();
-    //std::cout<< ("baklava" == A) ;
-    //std::cout<< (A == "baklava") ;
-    //XMLelement gosho;
-    //std::cout<<gosho.getId();
+    XMLelement mazno[100];
+    std::cout<<mazno[0].getId();
+    std::cout<<mazno[1].getId();
+    std::cout<<mazno[2].getId();
+    std::cout<<mazno[3].getId();
+    std::cout<<mazno[4].getId();
+
+
 }

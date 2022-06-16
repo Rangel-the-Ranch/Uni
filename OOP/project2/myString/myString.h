@@ -11,6 +11,7 @@ class myString{
         myString(const myString& other);
         myString(myString&& other);
         myString(size_t number);
+        myString(const char newSym);
 
         ~myString();
 
@@ -18,9 +19,15 @@ class myString{
         const char* get()const;
         bool isEmpty()const;
 
+        void removeFirstNsymbols(const size_t N);
+        size_t strstr(const myString& searchStr)const; 
+
         myString& operator=(const myString& other);
         myString& operator=(myString&& other);
         myString& operator+=(const myString& other);
+        //myString& operator+=(const char other);
+
+
     private:
         char* str;
         size_t size;

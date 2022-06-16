@@ -1,14 +1,23 @@
  #include"XMLelement.h"
 
+
 void XMLelement::setId(const char* newId){
-    id = newId;
+    myString result(newId);
+    if( strstr(newId , "_") ){
+        result = "_";
+        result += uniqueIdNum;
+        uniqueIdNum++;
+    }
+    id = result.get();
 }
  const char* XMLelement::getId()const{
     return id.get();
  }
+
  XMLelement::XMLelement(){
+    setId("_");
     atributes = new Atribute [DEFAULT_ATRIBUTE_ARR_SIZE];
-    childs = new XMLelement* [DEFAULT_CHILD_ARR_SIZE];
+    children = new XMLelement* [DEFAULT_CHILD_ARR_SIZE];
  }
 void XMLelement::addAtribute(const Atribute& newAtribute){
     while(numberOfAtributes + 1 >= sizeOfAtributeArr){
@@ -21,7 +30,7 @@ void XMLelement::resizeAtributeArr(){
     sizeOfAtributeArr = sizeOfAtributeArr * 2;
     Atribute* temp = new Atribute [ sizeOfAtributeArr ];
 
-    for(int i=0; i<sizeOfAtributeArr/2 ;i++){
+    for(size_t i=0; i<sizeOfAtributeArr/2 ;i++){
         temp[i] = atributes[i];
     }
 
@@ -35,7 +44,7 @@ void XMLelement::resizeAtributeArr(){
     return atributes;
  }
  const Atribute* XMLelement::searchAtribute(const char* searchText)const{
-    for(int i = 0; i<numberOfAtributes; i++){
+    for(size_t i = 0; i<numberOfAtributes; i++){
         if( atributes[i].getName() == searchText ){
             return &atributes[i];
         }
@@ -51,14 +60,16 @@ void XMLelement::resizeAtributeArr(){
  }
 
  void XMLelement::setText(const char* newText){
+    
     text = newText;
+    
  }
 const char* XMLelement::getText()const{
     return text.get();
 }
 void XMLelement::free(){
     delete []atributes;
-    delete []childs;
+    delete []children;
 }
 XMLelement::~XMLelement(){
     free();
@@ -71,7 +82,7 @@ void XMLelement::copyFrom(const XMLelement& other){
     numberOfAtributes = other.numberOfAtributes;
     sizeOfAtributeArr = other.sizeOfAtributeArr;
     atributes = new Atribute [sizeOfAtributeArr];
-    for(int i=0 ; i<sizeOfAtributeArr; i++){
+    for(size_t i=0 ; i<sizeOfAtributeArr; i++){
         atributes[i] = other.atributes[i];
     }
 
@@ -79,6 +90,11 @@ void XMLelement::copyFrom(const XMLelement& other){
 
     numberOfChilds= other.numberOfChilds;
     sizeOfChildArr = other.sizeOfChildArr;
+
+    children = new XMLelement* [sizeOfChildArr];
+    for(size_t i=0; i<sizeOfChildArr;i++){
+        children[i] = other.children[i];
+    }
     
 
 }
@@ -101,26 +117,33 @@ void XMLelement::setParent(XMLelement* newParentAdr){
 
 void XMLelement::addChild(XMLelement* newChild){
     while(numberOfChilds + 1 >= sizeOfChildArr){
+            
+        //std::cout<<"numOfChilds: "<< numberOfChilds;
+
         resizeChildArr();
     }
-    childs[numberOfChilds] = newChild;
+    children[numberOfChilds] = newChild;
     numberOfChilds++;
-
 }
 void XMLelement::resizeChildArr(){
     sizeOfChildArr = sizeOfChildArr*2;
     XMLelement** temp = new XMLelement* [sizeOfChildArr];
-    for(int i=0; i<sizeOfChildArr/2; i++){
-        temp[i] = childs[i];
+    for(size_t i=0; i<sizeOfChildArr/2; i++){
+        temp[i] = children[i];
     }
-    delete []childs;
-    childs = temp;
+    delete []children;
+    children = temp;
     temp = nullptr;
 
 }
-XMLelement** XMLelement::getChilds()const{
-    return childs;
+XMLelement** XMLelement::getChildren()const{
+    return children;
 }
 XMLelement* XMLelement::getChildByIndex(const size_t index)const{
-    return childs[index];
+    return children[index];
+}
+XMLelement::XMLelement(const char* newId){
+    atributes = new Atribute [DEFAULT_ATRIBUTE_ARR_SIZE];
+    children = new XMLelement* [DEFAULT_CHILD_ARR_SIZE];
+    setId(newId);
 }
