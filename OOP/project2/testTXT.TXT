@@ -1,2 +1,0 @@
-<player><person>Ivan</person></player>
-

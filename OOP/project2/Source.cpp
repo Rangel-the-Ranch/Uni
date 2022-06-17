@@ -16,7 +16,8 @@ size_t XMLelement::uniqueIdNum = 1;
 
 int main(){    
     Parser kur;
-    kur.incertFile("testTXT.TXT");
+    kur.incertFile("testTXT.xml");
+    std::cout<<std::endl;
     kur.print();
 
 }

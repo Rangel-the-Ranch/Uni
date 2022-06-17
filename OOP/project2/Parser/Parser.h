@@ -21,16 +21,16 @@ class Parser{
 
         void incertFile(const char* file);
         void print()const;
-        XMLelement* m_XMLelements = nullptr;
+        //XMLelement* m_XMLelements = nullptr;
     private:
         static const size_t DEFAULT_ELEMENTS_ARR_SIZE = 16;
-        //XMLelement* m_XMLelements = nullptr;
+        XMLelement* m_XMLelements = nullptr;
         size_t m_numberOfElements = 0;
         size_t m_sizeOfElementsArr = DEFAULT_ELEMENTS_ARR_SIZE;
-        myString m_edit;
+        myString m_edit = "_Base";
         
         void free();
         void copyFrom(const Parser& other);
         void resizeXMLelementArr();
-        const myString fileInput(std::ifstream& iFile)const;   
+        const myString fileInput(std::ifstream& iFile);   
 };
