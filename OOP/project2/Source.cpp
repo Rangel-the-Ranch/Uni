@@ -14,24 +14,24 @@
 
 size_t XMLelement::uniqueIdNum = 1;
 
-int main(){
-    
-    //Parser kur;
-    //kur.incertFile("testTXT.TXT");
-    /*
-    XMLelement A;
-    kur.addElement(A);
-    kur.getElementByIndex(0)->getText();
-    kur.m_edit->setText("jaba");
-    std::cout<<kur.getElementByIndex(0)->getText();
+int main(){    
+    Parser kur;
+    kur.incertFile("testTXT.TXT");
     kur.print();
-    */
-    XMLelement mazno[100];
-    std::cout<<mazno[0].getId();
-    std::cout<<mazno[1].getId();
-    std::cout<<mazno[2].getId();
-    std::cout<<mazno[3].getId();
-    std::cout<<mazno[4].getId();
-
 
 }
+/*
+<player>
+<person>Ivan</person>
+<person>Gosho</person>
+<person>Petur</person>
+</player>
+<items>
+<weapon>sword</weapon>
+<weapon>axe</weapon>
+<food>
+<slot>beef</slot>
+<slot>pork</slot>
+</food>
+</items>
+*/

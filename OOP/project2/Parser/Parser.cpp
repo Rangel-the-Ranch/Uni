@@ -52,7 +52,7 @@ void Parser::addElement(const XMLelement& newElement){
     
     m_XMLelements[m_numberOfElements].setParent(m_edit);
     
-    m_edit->addChild( &m_XMLelements[m_numberOfElements] );
+    //m_edit->addChild( &m_XMLelements[m_numberOfElements] );
     
     m_numberOfElements++;
     
@@ -68,14 +68,17 @@ void Parser::resizeXMLelementArr(){
     m_XMLelements = temp;
     temp = nullptr;
 }
-XMLelement* Parser::getElementByIndex(const size_t index)const{
+const XMLelement* Parser::getElementByIndex(const size_t index)const{
     return &m_XMLelements[index];
 }
+
 void Parser::goToParent(){
-    if(m_edit->getParentAdr() != nullptr){
-        m_edit = m_edit->getParentAdr();
+    if( !findParent(m_edit).isEmpty() ){
+        m_edit = findParent(m_edit);
     }
 }
+
+
 void Parser::incertFile(const char* file){
     std::ifstream iFile(file);
     if( !iFile.is_open() ){
@@ -85,13 +88,16 @@ void Parser::incertFile(const char* file){
     
     while( !iFile.eof() ){
         myString input( fileInput(iFile) );
-        std::cout<<input.get()<<"\n";
-        if(input.getSize() != 0){
+        //std::cout<<input.get()<<"\n";
+        if( input.getSize() ){
             if(input.get()[0] == '<'){
                 if( input.get()[1] == '/' ){
+                    
                     goToParent();
                 }else{
+
                     size_t sizeOfInput = input.getSize();
+
                     myString* words = new myString [sizeOfInput];
                     size_t numberOfWords = 0;
                     for(size_t i=1; i<sizeOfInput-1 && input.get()[i] != '>' ; i++){
@@ -113,29 +119,38 @@ void Parser::incertFile(const char* file){
                             temp.setId( words[i].get() );
                         }else{
                             Atribute tempAtribute(words[i].get() );
-                            temp.addAtribute(words[i].get());
                             temp.addAtribute(tempAtribute);
                         }
                     }
-                    
-                    
-                    
-                    //m_edit->addChild(&temp);
-                    std::cout<<temp.getId();
-                    //addElement(temp);
-               
                     delete []words; 
+                    
+                    
+                    const size_t curIndex = findIndexById(m_edit);   
+                    addElement(temp);
+                    if(curIndex != m_numberOfElements){
+                        m_XMLelements[curIndex].addChild( m_XMLelements[m_numberOfElements-1].getId() );
+                    }                     
+                    m_XMLelements[m_numberOfElements-1].setParent(m_edit);
+
+                    m_edit = m_XMLelements[m_numberOfElements-1].getId();
+                    
                 }
             }else{
-                //std::cout<<input.get();        
-                m_edit->setText( input.get() );
                 
+                const size_t curIndex = findIndexById(m_edit);    
+                if(curIndex != m_numberOfElements){
+                    m_XMLelements[curIndex].setText( input.get() );
+                }  
+                
+                 
             }
         }
     }
     iFile.close(); 
 
 }
+
+
 const myString Parser::fileInput(std::ifstream& iFile)const{
     myString inputLine;
     
@@ -144,13 +159,16 @@ const myString Parser::fileInput(std::ifstream& iFile)const{
         char nextSym;
         nextSym = iFile.get();
 
-        
         if( (nextSym == '<' && inputLine.getSize() != 0) || nextSym == '>' ){
+            
             if(nextSym == '<'){
-                iFile.seekg(-1);
+                
+                iFile.seekg(-1 , std::ios::cur);
+                
             }else{
                 inputLine += '>';
             }
+            
             return inputLine;
 
         }else{
@@ -162,15 +180,45 @@ const myString Parser::fileInput(std::ifstream& iFile)const{
     
     return inputLine;
 }
+
 void Parser::print()const{
-    std::cout<<"printer"<<std::endl;
     for(size_t i=0 ;i<m_numberOfElements;i++){
         std::cout<<"id: "<<m_XMLelements[i].getId()<<std::endl;
-        std::cout<<"parent: "<<m_XMLelements[i].getParentAdr()<<std::endl;
-        std::cout<<m_XMLelements->getText();
+        if( m_XMLelements[i].getParent().isEmpty() ){
+            std::cout<<"parent: NaN"<<std::endl;
+        }else{
+            std::cout<<"parent: "<< m_XMLelements[i].getParent().get() <<std::endl;
+        }
+        std::cout<<"children("<<m_XMLelements[i].getNumberOfChildren()<<"): ";
+        for(size_t j=0; j<m_XMLelements[i].getNumberOfChildren(); j++){
+            std::cout<< m_XMLelements[i].getChildByIndex(j).get() <<" ";
+        }
+        std::cout<<std::endl;
+        std::cout<<m_XMLelements[i].getText();
         std::cout<<"\n\n";
     }
 }
-void Parser::editElement(XMLelement* adr){
-    m_edit = adr;
+
+size_t Parser::findIndexById(const myString& searchedId)const{
+    for(size_t i = 0; i<m_numberOfElements ; i++){
+        if( searchedId == m_XMLelements[i].getId() ){
+            return i;
+        }
+    }
+    return m_numberOfElements;
 }
+const myString Parser::findParent(const myString& childId)const{
+    myString result;
+    const size_t childIndex = findIndexById(childId);
+    for(size_t i = 0; i<m_numberOfElements; i++){
+        if(m_XMLelements[childIndex].getParent() == m_XMLelements[i].getId() ){
+            result =  m_XMLelements[i].getId();
+        }
+    } 
+    return result;
+
+}
+const myString* Parser::getChildren(const myString& parentId)const{
+    const size_t parentIndex = findIndexById(parentId);
+    return m_XMLelements[parentIndex].getChildren();
+}   

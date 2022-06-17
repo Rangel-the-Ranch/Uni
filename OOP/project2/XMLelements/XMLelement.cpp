@@ -142,3 +142,6 @@ XMLelement::XMLelement(const char* newId){
     children = new myString [DEFAULT_CHILD_ARR_SIZE];
     setId(newId);
 }
+size_t XMLelement::getNumberOfChildren()const{
+    return numberOfChilds;
+}

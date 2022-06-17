@@ -28,6 +28,7 @@
         void addChild(const myString& newChild);
         const myString* getChildren()const;
         const myString& getChildByIndex(const size_t index)const;
+        size_t getNumberOfChildren()const;
         
         XMLelement& operator=(const XMLelement& other);
 
@@ -37,7 +38,7 @@
         static const size_t DEFAULT_CHILD_ARR_SIZE = 16;
 
         Atribute* atributes;
-        myString parent= "_";
+        myString parent;
         myString* children = nullptr;
         size_t numberOfAtributes = 0;
         size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;   
