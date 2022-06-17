@@ -1,0 +1,13 @@
+<player>
+	<person>Ivan</person>
+	<person>Gosho</person>
+	<person>Petur</person>
+</player>
+<items>
+	<weapon>sword</weapon>
+	<weapon>axe</weapon>
+	<food>
+		<slot>beef</slot>
+		<slot>pork</slot>
+	</food>
+</items>

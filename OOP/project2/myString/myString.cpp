@@ -4,9 +4,11 @@ void myString::free(){
     delete []str;
 }
 void myString::copyFrom(const myString& other){
-    str = new char[ strlen( other.get() ) + 1];
-	strcpy(str, other.get() );
-	size = other.getSize();
+    //if( !other.isEmpty() ){
+        str = new char[ strlen( other.get() ) + 1];
+	    strcpy(str, other.get() );
+	    size = other.getSize();
+    //}
 }
 void myString::concatFrom(const myString& other){
     char* temp = new char[getSize() + other.getSize() + 1];
