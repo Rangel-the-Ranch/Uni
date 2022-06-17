@@ -39,13 +39,14 @@
 
         Atribute* atributes;
         myString parent;
+        myString id;
+        myString text;
         myString* children = nullptr;
         size_t numberOfAtributes = 0;
         size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;   
         size_t numberOfChilds = 0;
         size_t sizeOfChildArr = DEFAULT_CHILD_ARR_SIZE;
-        myString id;
-        myString text;
+       
 
         void resizeAtributeArr();
         void resizeChildArr();

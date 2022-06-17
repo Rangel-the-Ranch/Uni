@@ -12,27 +12,21 @@
 #include"Parser/Parser.h"
 #include"Parser/Parser.cpp"
 
+#include"Interface/Interface.h"
+#include"Interface/Interface.cpp"
+
 size_t XMLelement::uniqueIdNum = 1;
 
-int main(){    
+int main(){  
+    /*
+    Interface inter;
+    inter.menu();
+    */
+
+      
     Parser kur;
     kur.incertFile("testTXT.xml");
     std::cout<<std::endl;
     kur.print();
-
+    
 }
-/*
-<player>
-<person>Ivan</person>
-<person>Gosho</person>
-<person>Petur</person>
-</player>
-<items>
-<weapon>sword</weapon>
-<weapon>axe</weapon>
-<food>
-<slot>beef</slot>
-<slot>pork</slot>
-</food>
-</items>
-*/
