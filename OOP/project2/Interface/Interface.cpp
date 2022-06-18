@@ -1,12 +1,13 @@
 #include"Interface.h"
 
 void Interface::help()const{
-    std::cout<<"open <name of file>         -> Open file with selected name"<<std::endl;
-    std::cout<<"close                       -> Closes currently opened XML file"<<std::endl;
-    std::cout<<"save                        -> Saves changes on current XML file"<<std::endl;
-    std::cout<<"saveAs <name of new file>   -> Caves changes on another XML file"<<std::endl;
-    std::cout<<"help                        -> Swows list of commands"<<std::endl;
-    std::cout<<"exit                        -> Exit program"<<std::endl;
+    std::cout<<"The following commands are supported:"<<std::endl;
+    std::cout<<"open <file>                 -> Open file with selected name"<<std::endl;
+    std::cout<<"close                       -> Closes currently opened file"<<std::endl;
+    std::cout<<"save                        -> Saves the currently open file"<<std::endl;
+    std::cout<<"saveAs <file>               -> Saves the currently open file in <file>"<<std::endl;
+    std::cout<<"help                        -> Prints this information"<<std::endl;
+    std::cout<<"exit                        -> Exits program"<<std::endl;
     std::cout<<"print                       -> Print loaded XML file"<<std::endl;
     std::cout<<"select <id> <key>           -> Get atribute value"<<std::endl;
     std::cout<<"set <id> <key> <value>      -> Set atribute value"<<std::endl;
@@ -17,6 +18,8 @@ void Interface::help()const{
     std::cout<<"text <id>                   -> Get text of <id>"<<std::endl;
 }
 void Interface::open(const char* fileName){
+    std::cout<<"Successfully opened "<<fileName;
+    std::cout<<std::endl;
     m_parser.incertFile(fileName);
     m_file = fileName;
 }
@@ -68,12 +71,12 @@ void Interface::child(const myString& elementId, const myString& key)const{
         std::cout<<"Invalid key!";
         return;
     }
-    const size_t convertT = static_cast<size_t>(convert);
+    const size_t convertT = static_cast<size_t>(convert);//Това го правя за да премахна warning
     if( convertT >= m_parser.getElementByIndex(indexOfElement)->getNumberOfChildren()){
         std::cout<<"Invalid key!";
         return;
     }
-    std::cout<<m_parser.getElementByIndex(indexOfElement)->getChildByIndex(convert).get();
+    std::cout<<m_parser.getElementByIndex(indexOfElement)->getChildByIndex(convertT).get();
     std::cout<<std::endl;
 }
 void Interface::newChild(const myString& elementId){
@@ -94,18 +97,30 @@ void Interface::deleteAtr(const myString& elementId, const myString& nameOfAtrib
 }
 void Interface::save()const{
     m_parser.exportToFile(m_file.get());
+    std::cout<<"Successfully saved "<<m_file.get();
+    std::cout<<std::endl;
 }
-void Interface::saveAs(const myString& newFile)const{
-    m_parser.exportToFile(newFile.get());
+void Interface::saveAs(const myString& newFile){
+    m_file = newFile;
+    m_parser.exportToFile(m_file.get());
+    std::cout<<"Successfully saved "<<m_file.get();
+    std::cout<<std::endl;
+    
 }
 void Interface::close(){
     if(m_file != '\0'){
         m_file = '\0';
         m_parser.cleanUp();
     }
+    std::cout<<"Successfully closed "<<m_file.get();
+    std::cout<<std::endl;
+}
+void Interface::xpath(const myString& elementId , const myString& newXpath)const{
+    //////////////////////////////////////////////////////////////////////////////////
 }
 void Interface::begin(){
     char input[MAX_INPUT_SIZE];
+    std::cout<<">";
     std::cin.getline(input, MAX_INPUT_SIZE);
     const size_t sizeOfInput = strlen(input) +1;
     myString* words = new myString[MAX_INPUT_SIZE];
@@ -122,31 +137,77 @@ void Interface::begin(){
         }
     }
     numberOfWords++;
-    bool didCommand = false;
-    bool exit = false;
-    if(words[0] == "open"){open(words[1].get()); didCommand = true;}
-    if(words[0] == "close"){close(); didCommand = true;}
-    if(words[0] == "save"){save(); didCommand = true;}
-    if(words[0] == "saveAs"){saveAs(words[1]); didCommand = true;}
-    if(words[0] == "help"){help(); didCommand = true;}
-    if(words[0] == "exit"){didCommand = true; exit = true;}
-    if(words[0] == "print"){print(); didCommand = true;}
-    if(words[0] == "select"){select(words[1] , words[2]); didCommand = true;}
-    if(words[0] == "set"){set(words[1] , words[2] , words[3]); didCommand = true;}
-    if(words[0] == "children"){children(words[1]); didCommand = true;}
-    if(words[0] == "child"){child(words[1] , words[2]); didCommand = true;}
-    if(words[0] == "text"){text(words[1]); didCommand = true;}
-    if(words[0] == "delete"){deleteAtr(words[1] , words[2]); didCommand = true;}
-    if(words[0] == "newChild"){newChild(words[1]); didCommand = true;}
-    
-    if(didCommand == false){
-        std::cout<<"druga komanda";
-    }
+    bool exitOpt = false;
+    if(words[0] == "open"){open(words[1].get());}
+    if(words[0] == "close"){close();unsavedChanges = false;}
+    if(words[0] == "save"){save();unsavedChanges = false;}
+    if(words[0] == "saveAs"){saveAs(words[1]);unsavedChanges = false;}
+    if(words[0] == "help"){help();}
+    if(words[0] == "exit"){  exitOpt = true;}
+    if(words[0] == "print"){print();}
+    if(words[0] == "select"){select(words[1] , words[2]);}
+    if(words[0] == "set"){set(words[1] , words[2] , words[3]);unsavedChanges = true;}
+    if(words[0] == "children"){children(words[1]);}
+    if(words[0] == "child"){child(words[1] , words[2]);}
+    if(words[0] == "text"){text(words[1]);}
+    if(words[0] == "delete"){deleteAtr(words[1] , words[2]);unsavedChanges = true;}
+    if(words[0] == "newChild"){newChild(words[1]);unsavedChanges = true;}
+    if(words[0] == "xpath"){xpath(words[1] , words[2]);}
 
     delete []words;
-    if(exit == true){
-        ////////////////////save / close//////////////////////////
+    if(exitOpt){
+        if( !exit() ){
+            begin();
+        }
     }else{
-        //begin();
+        begin();
+    }
+}
+bool Interface::exit(){
+    if(unsavedChanges == true){
+        std::cout<<"You have an open file with unsaved changes, please select close or save first."<<std::endl;
+        std::cout<<"close / save / saveAs <name of file> "<<std::endl;
+        std::cout<<"anything else to return to main menu"<<std::endl;
+        std::cout<<">";
+        char input[MAX_INPUT_SIZE];
+        std::cin.getline(input, MAX_INPUT_SIZE);
+        const size_t sizeOfInput = strlen(input) +1;
+        myString* words = new myString[MAX_INPUT_SIZE];
+        size_t numberOfWords = 0;
+        for(size_t i=0; i<sizeOfInput; i++){
+            if(input[i] == ' '){
+                words[i] += '\0';
+                if(input[i-1] !=' '){    
+                    numberOfWords++;
+                }
+            }else{
+                words[numberOfWords] += input[i];  
+            }
+        }
+        if(words[0] == "save"){
+            save();
+            unsavedChanges = false;
+            delete []words;
+            std::cout<<"Exiting program...";
+            return true;
+        }
+        if(words[0] == "saveAs"){
+            saveAs(words[1]);
+            unsavedChanges = false;
+            std::cout<<"Exiting program...";
+            delete []words;
+            return true;
+        }
+        if(words[0] == "close"){
+            close();
+            delete []words;
+            std::cout<<"Exiting program...";
+            return true;
+        }
+        delete []words;
+        return false;
+    }else{
+        std::cout<<"Exiting program...";
+        return true;
     }
 }

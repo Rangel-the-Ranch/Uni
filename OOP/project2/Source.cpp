@@ -1,17 +1,15 @@
-#include<iostream>
+//#include<iostream>
+
 #include"myString/myString.h"
-#include"myString/myString.cpp"
-
-#include"atribute/atribute.h"
-#include"atribute/atribute.cpp"
-
-#include"XMLelements/XMLelement.h"
-#include"XMLelements/XMLelement.cpp"
-
-#include"Parser/Parser.h"
-#include"Parser/Parser.cpp"
-
+#include"Interface/Parser/XMLelement/atribute/atribute.h"
+#include"Interface/Parser/XMLelement/XMLelement.h"
+#include"Interface/Parser/Parser.h"
 #include"Interface/Interface.h"
+
+#include"myString/myString.cpp"
+#include"Interface/Parser/XMLelement/atribute/atribute.cpp"
+#include"Interface/Parser/XMLelement/XMLelement.cpp"
+#include"Interface/Parser/Parser.cpp"
 #include"Interface/Interface.cpp"
 
 size_t XMLelement::uniqueIdNum = 1;
@@ -27,6 +25,6 @@ int main(){
     //Parser kur;
     //kur.incertFile("testTXT.xml");
     //kur.exportToFile("output.xml");
-    
+    return 0;
 }
 

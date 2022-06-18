@@ -262,6 +262,7 @@ void Parser::exportToFile(const char* fileName)const{
             oFile<<'\n';
         }   
     }
+    oFile.close();
 }
 void Parser::writeElement(std::ofstream& oFile ,const myString& elementId , const size_t subCount)const{
     const size_t index = findIndexById(elementId);
@@ -284,9 +285,10 @@ void Parser::writeElement(std::ofstream& oFile ,const myString& elementId , cons
         }
     }
     oFile<<">";
-    oFile<<m_XMLelements[index].getText();
     for(size_t i = 0 ; i < m_XMLelements[index].getNumberOfChildren() ; i++){
-        if(i != 0 ){
+        if(i == 0 ){
+            oFile<<m_XMLelements[index].getText();
+        }else{
             oFile<<'\n';
         }
 

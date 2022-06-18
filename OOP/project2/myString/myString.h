@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include<cstring>
 #include<cmath>
 class myString{
@@ -26,8 +25,6 @@ class myString{
         myString& operator=(const myString& other);
         myString& operator=(myString&& other);
         myString& operator+=(const myString& other);
-        //myString& operator+=(const char other);
-
 
     private:
         char* str;

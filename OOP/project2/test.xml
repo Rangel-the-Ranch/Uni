@@ -1,13 +1,11 @@
-<player>
-	<person porno="da" idiot id="boza">Ivan</person>
-	<person iq=48 id="terminator">Gosho</person>
-	<person iq="123" id=123>Petur</person>
+<player id="_18">	<person id="boza" porno="da"  idiot></person>
+	<person id="terminator" iq="48"></person>
+	<person id="123" iq="123">		< id="_23"></>
+	</person>
 </player>
-<items>
-	<weapon>sword</weapon>
-	<weapon>axe</weapon>
-	<food>
-		<slot>beef</slot>
-		<slot>pork</slot>
+<items id="_25">	<weapon id="_27"></weapon>
+	<weapon id="_29"></weapon>
+	<food id="_31">		<slot id="_33"></slot>
+		<slot id="_35"></slot>
 	</food>
 </items>
