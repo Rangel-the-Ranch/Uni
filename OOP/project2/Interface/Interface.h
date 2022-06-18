@@ -3,25 +3,27 @@
 #include<cstring>
 #include<iostream>
 
+#include"Parser/Parser.h"
+
 class Interface{
     public:
+        Interface();
         void begin();
 
-        
-        void open(const char* fileName);
+    private:
+        static const size_t MAX_INPUT_SIZE = 256;
+        Parser m_parser;
+        myString m_file;
+        bool m_unsavedChanges;
+
+
+        void open(const myString& fileName);
         void close();
         void save()const;
         void saveAs(const myString& newFile);
         void help()const;
         bool exit();
         void print()const;
-
-    private:
-        static const size_t MAX_INPUT_SIZE = 20;
-        Parser m_parser;
-        myString m_file;
-        bool unsavedChanges = true;
-
 
         void select(const myString& elementId , const myString& nameOfAtribute)const;
         void set(const myString& elementId , const myString& nameOfAtribute, const myString& newValue);

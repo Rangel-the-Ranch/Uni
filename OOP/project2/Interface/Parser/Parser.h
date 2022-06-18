@@ -2,7 +2,9 @@
 
 #include<cstring>
 #include<fstream>
+#include<iostream>
 
+#include"XMLelement/XMLelement.h"
 class Parser{
     public:
         Parser();

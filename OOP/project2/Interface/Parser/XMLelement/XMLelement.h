@@ -1,6 +1,7 @@
  #pragma once
  
  #include<cstring>
+ #include"atribute/atribute.h"
 
  class XMLelement{
     public:
@@ -40,11 +41,12 @@
         static const size_t DEFAULT_ATRIBUTE_ARR_SIZE = 16;
         static const size_t DEFAULT_CHILD_ARR_SIZE = 16;
 
-        Atribute* atributes;
+        
         myString parent;
         myString id;
         myString text;
         myString* children = nullptr;
+        Atribute* atributes;
         size_t numberOfAtributes = 0;
         size_t sizeOfAtributeArr = DEFAULT_ATRIBUTE_ARR_SIZE;   
         size_t numberOfChilds = 0;

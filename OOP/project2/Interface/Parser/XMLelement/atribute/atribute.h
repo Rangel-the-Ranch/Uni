@@ -1,4 +1,5 @@
 #pragma once
+#include"myString/myString.h"
 class Atribute{
     public:
         Atribute() = default;

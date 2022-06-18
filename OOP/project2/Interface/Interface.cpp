@@ -17,10 +17,10 @@ void Interface::help()const{
     std::cout<<"newChild <id>               -> Add empty child to <id>"<<std::endl;
     std::cout<<"text <id>                   -> Get text of <id>"<<std::endl;
 }
-void Interface::open(const char* fileName){
-    std::cout<<"Successfully opened "<<fileName;
+void Interface::open(const myString& fileName){
+    std::cout<<"Successfully opened "<<fileName.get();
     std::cout<<std::endl;
-    m_parser.incertFile(fileName);
+    m_parser.incertFile(fileName.get());
     m_file = fileName;
 }
 void Interface::text(const myString& elementId)const{
@@ -65,18 +65,17 @@ void Interface::children(const myString& elementId)const{
     std::cout<<std::endl;
 }
 void Interface::child(const myString& elementId, const myString& key)const{
-    const int convert = key.getNumber();
     const size_t indexOfElement = m_parser.findIndexById(elementId);
     if( key.getNumber() == -1 ){
-        std::cout<<"Invalid key!";
+        std::cout<<"Invalid key!"<<std::endl;
         return;
     }
-    const size_t convertT = static_cast<size_t>(convert);//Това го правя за да премахна warning
-    if( convertT >= m_parser.getElementByIndex(indexOfElement)->getNumberOfChildren()){
-        std::cout<<"Invalid key!";
+    const size_t convert  = static_cast<size_t>(key.getNumber() );//Това го правя за да премахна warning
+    if( convert >= m_parser.getElementByIndex(indexOfElement)->getNumberOfChildren()){
+        std::cout<<"Invalid key! (Index to big)"<<std::endl;
         return;
     }
-    std::cout<<m_parser.getElementByIndex(indexOfElement)->getChildByIndex(convertT).get();
+    std::cout<<m_parser.getElementByIndex(indexOfElement)->getChildByIndex(convert).get();
     std::cout<<std::endl;
 }
 void Interface::newChild(const myString& elementId){
@@ -138,20 +137,20 @@ void Interface::begin(){
     }
     numberOfWords++;
     bool exitOpt = false;
-    if(words[0] == "open"){open(words[1].get());}
-    if(words[0] == "close"){close();unsavedChanges = false;}
-    if(words[0] == "save"){save();unsavedChanges = false;}
-    if(words[0] == "saveAs"){saveAs(words[1]);unsavedChanges = false;}
+    if(words[0] == "open"){open(words[1]);}
+    if(words[0] == "close"){close();m_unsavedChanges = false;}
+    if(words[0] == "save"){save();m_unsavedChanges = false;}
+    if(words[0] == "saveAs"){saveAs(words[1]);m_unsavedChanges = false;}
     if(words[0] == "help"){help();}
     if(words[0] == "exit"){  exitOpt = true;}
     if(words[0] == "print"){print();}
     if(words[0] == "select"){select(words[1] , words[2]);}
-    if(words[0] == "set"){set(words[1] , words[2] , words[3]);unsavedChanges = true;}
+    if(words[0] == "set"){set(words[1] , words[2] , words[3]);m_unsavedChanges = true;}
     if(words[0] == "children"){children(words[1]);}
     if(words[0] == "child"){child(words[1] , words[2]);}
     if(words[0] == "text"){text(words[1]);}
-    if(words[0] == "delete"){deleteAtr(words[1] , words[2]);unsavedChanges = true;}
-    if(words[0] == "newChild"){newChild(words[1]);unsavedChanges = true;}
+    if(words[0] == "delete"){deleteAtr(words[1] , words[2]);m_unsavedChanges = true;}
+    if(words[0] == "newChild"){newChild(words[1]);m_unsavedChanges = true;}
     if(words[0] == "xpath"){xpath(words[1] , words[2]);}
 
     delete []words;
@@ -164,7 +163,7 @@ void Interface::begin(){
     }
 }
 bool Interface::exit(){
-    if(unsavedChanges == true){
+    if(m_unsavedChanges == true){
         std::cout<<"You have an open file with unsaved changes, please select close or save first."<<std::endl;
         std::cout<<"close / save / saveAs <name of file> "<<std::endl;
         std::cout<<"anything else to return to main menu"<<std::endl;
@@ -186,14 +185,14 @@ bool Interface::exit(){
         }
         if(words[0] == "save"){
             save();
-            unsavedChanges = false;
+            m_unsavedChanges = false;
             delete []words;
             std::cout<<"Exiting program...";
             return true;
         }
         if(words[0] == "saveAs"){
             saveAs(words[1]);
-            unsavedChanges = false;
+            m_unsavedChanges = false;
             std::cout<<"Exiting program...";
             delete []words;
             return true;
@@ -201,6 +200,7 @@ bool Interface::exit(){
         if(words[0] == "close"){
             close();
             delete []words;
+            m_unsavedChanges = false;
             std::cout<<"Exiting program...";
             return true;
         }
@@ -210,4 +210,7 @@ bool Interface::exit(){
         std::cout<<"Exiting program...";
         return true;
     }
+}
+Interface::Interface(){
+    m_unsavedChanges = false;
 }

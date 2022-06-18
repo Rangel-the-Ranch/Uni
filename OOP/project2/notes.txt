@@ -1,5 +1,10 @@
-Xpath
+#include"myString/myString.h"
+#include"Interface/Parser/XMLelement/atribute/atribute.h"
+#include"Interface/Parser/XMLelement/XMLelement.h"
+#include"Interface/Parser/Parser.h"
+#include"Interface/Interface.h"
 
+Xpath
 operator /
 operator []
 operator @
