@@ -1,5 +1,4 @@
 #include<iostream>
-
 #include"myString/myString.h"
 #include"myString/myString.cpp"
 
@@ -16,17 +15,18 @@
 #include"Interface/Interface.cpp"
 
 size_t XMLelement::uniqueIdNum = 1;
+const myString Parser::BASE_ID = "_Base";
 
 int main(){  
-    /*
+    
     Interface inter;
-    inter.menu();
-    */
-
-      
-    Parser kur;
-    kur.incertFile("testTXT.xml");
-    std::cout<<std::endl;
-    kur.print();
+    inter.begin();
+    //inter.open("testTXT.xml");
+    //inter.print();
+    
+    //Parser kur;
+    //kur.incertFile("testTXT.xml");
+    //kur.exportToFile("output.xml");
     
 }
+

@@ -1,0 +1,10 @@
+<player id="_17">	<person id="boza" porno="da"  idiot>Ivan</person>
+	<person id="terminator" iq="48">Gosho</person>
+	<person id="123" iq="123">Petur</person>
+</player>
+<items id="_21">	<weapon id="_22">sword</weapon>
+	<weapon id="_23">axe</weapon>
+	<food id="_24">		<slot id="_25">beef</slot>
+		<slot id="_26">pork</slot>
+	</food>
+</items>

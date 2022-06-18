@@ -15,9 +15,12 @@
         const char* getId()const;
 
         void addAtribute(const Atribute& newAtribute);
+        void deleteAtribute(const myString& name);
         const Atribute* getAtributes()const;
         const Atribute* searchAtribute(const char* searchName)const;
-        const Atribute* getAtributeNum(const size_t number)const;
+        const Atribute* getAtributeByIndex(const size_t number)const;
+        Atribute* getAtributeByName(const myString& name)const;
+        size_t getNumberOfAtributes()const;
 
         void setText(const char* newText);
         const char* getText()const;

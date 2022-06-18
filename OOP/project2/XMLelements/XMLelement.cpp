@@ -49,13 +49,16 @@ const Atribute* XMLelement::searchAtribute(const char* searchText)const{
     }
     return nullptr;
  }
-const Atribute* XMLelement::getAtributeNum(const size_t number)const{
+const Atribute* XMLelement::getAtributeByIndex(const size_t number)const{
     if(number > numberOfAtributes){
         return nullptr;
     }else{
         return &atributes[number];
     }
  }
+size_t XMLelement::getNumberOfAtributes()const{
+    return numberOfAtributes;
+}
 void XMLelement::setText(const char* newText){
     
     text = newText;
@@ -144,4 +147,23 @@ XMLelement::XMLelement(const char* newId){
 }
 size_t XMLelement::getNumberOfChildren()const{
     return numberOfChilds;
+}
+Atribute* XMLelement::getAtributeByName(const myString& name)const{
+    for(size_t i=0; i<numberOfAtributes; i++){
+        if(atributes[i].getName() == name ){
+            return &atributes[i];
+        }
+    }
+    return nullptr;
+}
+void XMLelement::deleteAtribute(const myString& name){
+    for(size_t i=0; i<numberOfAtributes; i++){
+        if(name == atributes[i].getName()){
+            for(size_t j=i; j<numberOfAtributes-1; j++){
+                atributes[j] = atributes[j+1];
+            }
+            numberOfAtributes--;
+            break;
+        }
+    }
 }

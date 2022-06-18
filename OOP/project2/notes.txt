@@ -1,2 +1,8 @@
-set parent член данни в XMLelements
--1 na tell g
+Xpath
+
+operator /
+operator []
+operator @
+operator =
+
+improve print

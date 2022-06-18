@@ -4,11 +4,13 @@ void myString::free(){
     delete []str;
 }
 void myString::copyFrom(const myString& other){
-    //if( !other.isEmpty() ){
+    if( !other.isEmpty() ){
         str = new char[ strlen( other.get() ) + 1];
 	    strcpy(str, other.get() );
 	    size = other.getSize();
-    //}
+    }else{
+        makeEmpty();
+    }
 }
 void myString::concatFrom(const myString& other){
     char* temp = new char[getSize() + other.getSize() + 1];
@@ -22,15 +24,11 @@ void myString::concatFrom(const myString& other){
 	size = size + other.getSize();
 }
 myString::myString(){
-    str = new char [ 1 ];
-    str[0] = '\0';
-    size = 0 ; 
+    makeEmpty();
 }
 myString::myString(const char* newString){
     if(newString == nullptr){
-        str = new char[ 1 ];
-		str[0] = '\0';
-		size = 0;
+        makeEmpty();
     }else{
         size = strlen(newString);
         str = new char [ size + 1 ];
@@ -57,7 +55,6 @@ size_t getNumSize(size_t number){
 
 
 myString::~myString(){
-    //std::cout<<"deletos";
     free();
 }
 size_t myString::getSize()const{
@@ -69,6 +66,7 @@ const char* myString::get()const{
 
 myString& myString::operator=(const myString& other){
     if( this != &other){
+        
         free();
         copyFrom(other);
     }
@@ -101,6 +99,10 @@ bool operator==(const myString& left , const myString& right){
     return !strcmp(left.get() , right.get() );
     
 }
+bool operator!=(const myString& left , const myString& right){
+    return strcmp(left.get() , right.get() );
+    
+}
 void myString::removeFirstNsymbols(const size_t N){
     char* temp = new char[size-N+1];
     for(size_t i=N; i <= size; i++){
@@ -109,6 +111,17 @@ void myString::removeFirstNsymbols(const size_t N){
     delete []str;
     str = temp;
     size=size-N;
+    temp = nullptr;
+}
+void myString::removeLastNsymbols(const size_t N){
+    char* temp = new char[size - N + 1];
+    for(size_t i=0; i < size - N; i++){
+        temp[i] = str[i];
+    }
+    temp[size-N] = '\0';
+    delete []str;
+    str = temp;
+    size = size-N;
     temp = nullptr;
 }
 size_t myString::strstr(const myString& searchStr)const{
@@ -128,7 +141,7 @@ size_t myString::strstr(const myString& searchStr)const{
     return size+1;
 }
 
-myString::myString(size_t number){
+myString::myString(unsigned long long number){
     size = getNumSize(number);
 
     str = new char[size + 1];
@@ -146,4 +159,22 @@ myString::myString(const char newSym){
     size = 1;
     str[0] = newSym;
     str[1] = '\0';
+}
+void myString::makeEmpty(){
+    str = new char[ 1 ];
+	str[0] = '\0';
+	size = 0;
+}
+long long myString::getNumber()const{
+    long long result=0;
+    for(size_t i=0; i<size; i++){
+        
+        if(str[size - i -1] < 48 || str[size - i -1] > 57 ){
+            return -1;
+        }
+        result = result + (str[size - i - 1] - '0')*pow(10, i);
+        
+    }
+    
+    return result;
 }

@@ -11,26 +11,30 @@ class Parser{
         Parser& operator=(const Parser& other);
 
         void addElement(const XMLelement& newElement);
-        const XMLelement* getElementByIndex(const size_t index)const;
-
-        void goToParent();
+        XMLelement* getElementByIndex(const size_t index)const;
 
         size_t findIndexById(const myString& searchedId)const;
         const myString findParent(const myString& childId)const;
         const myString* getChildren(const myString& parentId)const;
 
         void incertFile(const char* file);
+        void exportToFile(const char* file)const;
         void print()const;
-        //XMLelement* m_XMLelements = nullptr;
+        void cleanUp();
+        
     private:
+        static const myString BASE_ID;
         static const size_t DEFAULT_ELEMENTS_ARR_SIZE = 16;
-        XMLelement* m_XMLelements = nullptr;
-        size_t m_numberOfElements = 0;
-        size_t m_sizeOfElementsArr = DEFAULT_ELEMENTS_ARR_SIZE;
-        myString m_edit = "_Base";
+        XMLelement* m_XMLelements;
+        size_t m_numberOfElements;
+        size_t m_sizeOfElementsArr;
+        
         
         void free();
+        void setDefaultValues();
         void copyFrom(const Parser& other);
         void resizeXMLelementArr();
-        const myString fileInput(std::ifstream& iFile);   
+        const myString fileInput(std::ifstream& iFile)const; 
+        void writeElement(std::ofstream& oFile ,const myString& elementId, const size_t subCount)const; 
+        void tabInNtimes(std::ofstream& oFile , const size_t N)const;
 };

@@ -1,7 +1,7 @@
 <player>
-	<person>Ivan</person>
-	<person>Gosho</person>
-	<person>Petur</person>
+	<person porno="da" idiot id="boza">Ivan</person>
+	<person iq=48 id="terminator">Gosho</person>
+	<person iq="123" id=123>Petur</person>
 </player>
 <items>
 	<weapon>sword</weapon>

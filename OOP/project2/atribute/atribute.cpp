@@ -13,7 +13,7 @@ void Atribute::setValue(const char* newValue){
     value = newValue;
 }
 bool Atribute::withoutValue()const{
-    return !value.isEmpty();
+    return value.isEmpty();
 }
 Atribute::Atribute(const char* newName , const char* newValue){
     name = newName;
