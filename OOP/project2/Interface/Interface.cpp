@@ -16,6 +16,7 @@ void Interface::help()const{
     std::cout<<"child <id> <n>              -> Get index <n> child of <id>"<<std::endl;
     std::cout<<"newChild <id>               -> Add empty child to <id>"<<std::endl;
     std::cout<<"text <id>                   -> Get text of <id>"<<std::endl;
+    std::cout<<"xpath <id> <XPath>          -> XPath"<<std::endl;
 }
 void Interface::open(const myString& fileName){
     std::cout<<"Successfully opened "<<fileName.get();
@@ -114,8 +115,8 @@ void Interface::close(){
     std::cout<<"Successfully closed "<<m_file.get();
     std::cout<<std::endl;
 }
-void Interface::xpath(const myString& elementId , const myString& newXpath)const{
-    //////////////////////////////////////////////////////////////////////////////////
+void Interface::xpath(const myString& elementId , const myString& newXpath){
+    m_parser.xPath(elementId,newXpath);
 }
 void Interface::begin(){
     char input[MAX_INPUT_SIZE];

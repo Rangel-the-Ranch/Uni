@@ -10,12 +10,6 @@ class Interface{
         Interface();
         void begin();
 
-    private:
-        static const size_t MAX_INPUT_SIZE = 256;
-        Parser m_parser;
-        myString m_file;
-        bool m_unsavedChanges;
-
 
         void open(const myString& fileName);
         void close();
@@ -24,6 +18,16 @@ class Interface{
         void help()const;
         bool exit();
         void print()const;
+        void xpath(const myString& elementId , const myString& xpath);
+
+    private:
+        static const size_t MAX_INPUT_SIZE = 256;
+        Parser m_parser;
+        myString m_file;
+        bool m_unsavedChanges;
+
+
+        
 
         void select(const myString& elementId , const myString& nameOfAtribute)const;
         void set(const myString& elementId , const myString& nameOfAtribute, const myString& newValue);
@@ -32,5 +36,5 @@ class Interface{
         void text(const myString& elementId)const;
         void deleteAtr(const myString& elementId, const myString& nameOfAtribute);
         void newChild(const myString& elementId);
-        void xpath(const myString& elementId , const myString& xpath)const;
+        
 };

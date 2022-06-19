@@ -285,13 +285,11 @@ void Parser::writeElement(std::ofstream& oFile ,const myString& elementId , cons
         }
     }
     oFile<<">";
-    for(size_t i = 0 ; i < m_XMLelements[index].getNumberOfChildren() ; i++){
-        if(i == 0 ){
-            oFile<<m_XMLelements[index].getText();
-        }else{
+    oFile<<m_XMLelements[index].getText();
+    for(size_t i = 0 ; i < m_XMLelements[index].getNumberOfChildren() ; ++i){
+        if(i != 0 ){
             oFile<<'\n';
         }
-
         writeElement(oFile , m_XMLelements[index].getChildByIndex(i), subCount+1 );
     }
     if(m_XMLelements[index].getNumberOfChildren() != 0){
@@ -315,4 +313,60 @@ void Parser::setDefaultValues(){
     m_XMLelements = nullptr;
     m_numberOfElements = 0;
     m_sizeOfElementsArr =DEFAULT_ELEMENTS_ARR_SIZE;
+}
+XMLelement* Parser::xPath(const myString& elementId ,const myString& command){
+    size_t currentIndex = findIndexById(elementId);
+    if(currentIndex == m_numberOfElements){
+        return nullptr;
+    }
+
+    myString* words = new myString[ command.getSize() ];
+    size_t numberOfWords = 0;
+
+    for(size_t i=0; i< command.getSize(); i++){
+        if(command.get()[i] == '/' || command.get()[i] == '@'){   
+            numberOfWords++;
+        }
+        words[numberOfWords] += command.get()[i];
+    }
+    myString* remainingElelemts = new myString[m_numberOfElements];
+    const size_t numberOfChildren =  m_XMLelements[currentIndex].getNumberOfChildren();
+    size_t remainingCount = numberOfChildren;
+    for(size_t i=0; i<remainingCount;i++){
+        remainingElelemts[i] =  m_XMLelements[currentIndex].getChildByIndex(i);
+    }
+    for(size_t i=0; i<numberOfWords; i++){
+        char lastSym = words[i].get()[ words[i].getSize()-1 ];
+        if(lastSym == '/'){
+            /*
+            words[i].removeLastNsymbols(1);
+            for(size_t j=0; j<numberOfChildren; j++){
+                size_t tempIndex = findIndexById(remainingElelemts[j]);
+                for(size_t s = 0; s<m_XMLelements[tempIndex].getNumberOfAtributes(); s++){
+                    if(m_XMLelements[tempIndex].getAtributeByIndex(s)->getName() == words[i]){
+                        break;
+                    }
+                    if(s == m_XMLelements[tempIndex].getNumberOfAtributes()-1 ){
+                        remainingElelemts[j] = '\0';
+                        remainingCount--;
+                    }
+                }
+
+            }
+            */
+        }else if(lastSym == '@'){
+            words[i].removeLastNsymbols(1);
+            
+        }else{
+            
+        }
+    }
+    for(int i=0; i<numberOfChildren; i++){
+            if(!remainingElelemts[i].isEmpty()){
+                std::cout<<remainingElelemts[i].get()<<" ";
+            }
+        }
+    delete []remainingElelemts;
+    delete []words;
+    return nullptr;
 }

@@ -1,13 +1,6 @@
 <player id="_18">
-	<person id="boza" toster gtadusi=57>Ivan</person>
-	<person id="terminator" gradusi=140>Gosho</person>
-	<person id=123 iq="123">Petkan</person>
+	<person id="boza" toster  gradusi="57">Ivan</person>
+	<person id="terminator" gradusi="140">Petko</person>
+	<person id="123" iq="123">Gosho</person>
 </player>
-<items id="_25">
-	<weapon id="_27">me4</weapon>
-	<weapon id="_29">bradva</weapon>
-	<food id="_31">
-		<slot id="_33">tuk</slot>
-		<slot id="_35">tak</slot>
-	</food>
-</items>
+

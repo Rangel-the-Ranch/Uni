@@ -14,10 +14,11 @@ class Parser{
 
         void addElement(const XMLelement& newElement);
         XMLelement* getElementByIndex(const size_t index)const;
-
         size_t findIndexById(const myString& searchedId)const;
         const myString findParent(const myString& childId)const;
         const myString* getChildren(const myString& parentId)const;
+
+        XMLelement* xPath(const myString& elementId ,const myString& command);
 
         void incertFile(const char* file);
         void exportToFile(const char* file)const;
