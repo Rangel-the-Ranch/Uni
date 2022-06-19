@@ -1,11 +1,13 @@
-<player id="_18">	<person id="boza" porno="da"  idiot></person>
-	<person id="terminator" iq="48"></person>
-	<person id="123" iq="123">		< id="_23"></>
-	</person>
+<player id="_18">
+	<person id="boza" toster gtadusi=57>Ivan</person>
+	<person id="terminator" gradusi=140>Gosho</person>
+	<person id=123 iq="123">Petkan</person>
 </player>
-<items id="_25">	<weapon id="_27"></weapon>
-	<weapon id="_29"></weapon>
-	<food id="_31">		<slot id="_33"></slot>
-		<slot id="_35"></slot>
+<items id="_25">
+	<weapon id="_27">me4</weapon>
+	<weapon id="_29">bradva</weapon>
+	<food id="_31">
+		<slot id="_33">tuk</slot>
+		<slot id="_35">tak</slot>
 	</food>
 </items>
