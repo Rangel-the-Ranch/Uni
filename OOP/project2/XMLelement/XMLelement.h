@@ -1,7 +1,7 @@
  #pragma once
  
  #include<cstring>
- #include"atribute/atribute.h"
+ #include"../atribute/atribute.h"
 
  class XMLelement{
     public:

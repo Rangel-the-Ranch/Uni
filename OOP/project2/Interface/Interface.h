@@ -3,22 +3,13 @@
 #include<cstring>
 #include<iostream>
 
-#include"Parser/Parser.h"
+#include"../Parser/Parser.h"
 
 class Interface{
     public:
         Interface();
-        void begin();
-
-
-        void open(const myString& fileName);
-        void close();
-        void save()const;
-        void saveAs(const myString& newFile);
-        
-        void print()const;
-        
-        void xpath(const myString& elementId , const myString& xpath);
+        Interface(bool shouldStart);
+        void menu();
 
     private:
         static const size_t MAX_INPUT_SIZE = 256;
@@ -26,15 +17,14 @@ class Interface{
         myString m_file;
         bool m_unsavedChanges;
 
-        /*
+        
         void open(const myString& fileName);
         void close();
         void save()const;
         void saveAs(const myString& newFile);
-        */
         void help()const;
         bool exit();
-        //void print()const;
+        void print()const;
         void select(const myString& elementId , const myString& nameOfAtribute)const;
         void set(const myString& elementId , const myString& nameOfAtribute, const myString& newValue);
         void children(const myString& elementId)const;
@@ -42,5 +32,5 @@ class Interface{
         void text(const myString& elementId)const;
         void deleteAtr(const myString& elementId, const myString& nameOfAtribute);
         void newChild(const myString& elementId);
-        //void xpath(const myString& elementId , const myString& xpath);
+        void xpath(const myString& elementId , const myString& xpath);
 };

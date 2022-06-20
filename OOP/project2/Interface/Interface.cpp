@@ -118,7 +118,7 @@ void Interface::close(){
 void Interface::xpath(const myString& elementId , const myString& newXpath){
     m_parser.xPath(elementId,newXpath);
 }
-void Interface::begin(){
+void Interface::menu(){
     char input[MAX_INPUT_SIZE];
     std::cout<<">";
     std::cin.getline(input, MAX_INPUT_SIZE);
@@ -138,29 +138,26 @@ void Interface::begin(){
     }
     numberOfWords++;
     bool exitOpt = false;
-    if(words[0] == "open"){open(words[1]);}
-    if(words[0] == "close"){close();m_unsavedChanges = false;}
-    if(words[0] == "save"){save();m_unsavedChanges = false;}
-    if(words[0] == "saveAs"){saveAs(words[1]);m_unsavedChanges = false;}
-    if(words[0] == "help"){help();}
-    if(words[0] == "exit"){  exitOpt = true;}
-    if(words[0] == "print"){print();}
-    if(words[0] == "select"){select(words[1] , words[2]);}
-    if(words[0] == "set"){set(words[1] , words[2] , words[3]);m_unsavedChanges = true;}
-    if(words[0] == "children"){children(words[1]);}
-    if(words[0] == "child"){child(words[1] , words[2]);}
-    if(words[0] == "text"){text(words[1]);}
-    if(words[0] == "delete"){deleteAtr(words[1] , words[2]);m_unsavedChanges = true;}
-    if(words[0] == "newChild"){newChild(words[1]);m_unsavedChanges = true;}
-    if(words[0] == "xpath"){xpath(words[1] , words[2]);}
+    if(words[0] == "open"){open(words[1]);
+    }else if(words[0] == "close"){close();m_unsavedChanges = false;
+    }else if(words[0] == "save"){save();m_unsavedChanges = false;
+    }else if(words[0] == "saveAs"){saveAs(words[1]);m_unsavedChanges = false;
+    }else if(words[0] == "help"){help();
+    }else if(words[0] == "exit"){  exitOpt = true;
+    }else if(words[0] == "print"){print();
+    }else if(words[0] == "select"){select(words[1] , words[2]);
+    }else if(words[0] == "set"){set(words[1] , words[2] , words[3]);m_unsavedChanges = true;
+    }else if(words[0] == "children"){children(words[1]);
+    }else if(words[0] == "child"){child(words[1] , words[2]);
+    }else if(words[0] == "text"){text(words[1]);
+    }else if(words[0] == "delete"){deleteAtr(words[1] , words[2]);m_unsavedChanges = true;
+    }else if(words[0] == "newChild"){newChild(words[1]);m_unsavedChanges = true;
+    }else if(words[0] == "xpath"){xpath(words[1] , words[2]);
+    }
 
     delete []words;
-    if(exitOpt){
-        if( !exit() ){
-            begin();
-        }
-    }else{
-        begin();
+    if( !( exitOpt && exit() ) ){
+        menu();
     }
 }
 bool Interface::exit(){
@@ -214,4 +211,10 @@ bool Interface::exit(){
 }
 Interface::Interface(){
     m_unsavedChanges = false;
+}
+Interface::Interface(bool shouldStart){
+    m_unsavedChanges = false;
+    if(shouldStart){
+        menu();
+    }
 }

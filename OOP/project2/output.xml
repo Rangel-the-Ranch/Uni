@@ -1,0 +1,14 @@
+<player id="_18">	<person id="boza" toster  gradusi="57">Ivan</person>
+	<person id="terminator" gradusi="140">Petko</person>
+	<person id="123" iq="123">Gosho</person>
+</player>
+<player id="_23">	<person id="_25" toster  gradusi="57">Ivan</person>
+	<person id="_27" gradusi="140">Petko</person>
+	<person id="_29" iq="123">Gosho</person>
+</player>
+<items id="_31">	<weapon id="_33">item1</weapon>
+	<weapon id="_35">item2</weapon>
+	<food id="_37">		<slot id="_39">slot1</slot>
+		<slot id="_41">slot2</slot>
+	</food>
+</items>
