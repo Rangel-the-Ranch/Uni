@@ -3,6 +3,6 @@
 size_t XMLelement::uniqueIdNum = 1;
 const myString Parser::BASE_ID = "_Base";
 
-int main(){  
+int main(){ 
     Interface i(true);
 }
