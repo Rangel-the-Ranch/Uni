@@ -1,2 +1,5 @@
 cd OOP/project2
 g++ Source.cpp myString/myString.cpp atribute/atribute.cpp XMLelement/XMLelement.cpp Parser/Parser.cpp Interface/Interface.cpp -o Source.exe ; ./Source.exe
+
+<template T>
+class A{}

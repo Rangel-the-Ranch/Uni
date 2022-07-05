@@ -4,9 +4,9 @@
 
 
 int main(){
-    Vector A(2, 5);
+    Vector A(5, 5);
     Vector B(2,7);
-    
-    std::cout<< A[1];
+    A = B;
+    std::cout<< A.getX();
     
 }

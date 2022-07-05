@@ -17,6 +17,7 @@ class Dish{
         virtual ~Dish();
         
         Dish& operator=(const Dish& other);
+        Dish& operator=(Dish&& other);
 
     private:
 
