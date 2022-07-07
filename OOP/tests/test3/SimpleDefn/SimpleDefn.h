@@ -13,6 +13,7 @@ class SimpleDefn{
 
         virtual void setName(const char* newName);
         virtual void setValue(const char* newValue);
+        
         const char* getName()const;
         const char* getValue()const;
 

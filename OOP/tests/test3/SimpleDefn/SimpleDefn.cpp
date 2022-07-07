@@ -89,6 +89,15 @@ bool SimpleDefn::validNameCheck(const char* string)const{
 SimpleDefn& SimpleDefn::operator=(SimpleDefn&& other){
     if(this != &other){
         free();
+        /*
+        m_name = new char [ strlen(other.m_name)+1 ];
+        strcpy(m_name , other.m_value);
+
+        m_value = new char [ strlen(other.m_value)+1 ];
+        strcpy(m_value , other.m_value);
+        other.n_name = nullptr;
+        other.m_value = nullprt
+        */
         copyFrom(other);
     }
     return *this;

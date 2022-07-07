@@ -6,6 +6,7 @@
 
 class ComplexDefn :virtual public CalcDefn ,virtual public PramDefn {
     public:
+    
         ComplexDefn();
         ComplexDefn(const char* newName , const char* newValue);
         ComplexDefn(const ComplexDefn& other);
